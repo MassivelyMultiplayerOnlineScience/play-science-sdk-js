@@ -1,0 +1,69 @@
+{
+	"description": "Additional info about the task. Exact structure defined per project.",
+	"type": [ "object" ],
+	"required": [ "parScore", "scoring" ],
+	"additionalProperties": false,
+	"properties": {
+			"parScore": {
+					"description": "The score that is calculated by the agreed algorithm by Phylo",
+					"type": "number"
+			},
+			"parScoreSolution": {
+				"description": "It will contain the puzzle setup that is paired with the parScore",
+				"type": "array",
+				"items": { 
+					"type": "string",
+					"pattern": "^[-ACTG]+$"
+				}
+			},
+			"scoring": {
+					"description": "Scoring options",
+					"type": [ "object" ],
+					"required": [ "version", "gapPenalty", "gapLengthPenalty", "maxGapCount", "match", "mismatch", "acceptedPairs", "completeRowBonusMultiplier"],
+					"additionalProperties": false,
+					"properties": {
+							"version": {
+									"description": "The version id of the scoring algorithm .",
+									"type": "string"
+							},
+							"gapPenalty": {
+									"description": "Score penalty for opening a gap in the sequence",
+									"type": "integer"
+							},
+							"gapLengthPenalty": {
+									"description": "Score penalty per each gap element",
+									"type": "integer"
+							},
+							"maxGapCount": {
+								"description": "Maximum number of gaps allowed",
+								"type": "integer"
+							},
+							"match": {
+									"description": "Score gain for matching pairs",
+									"type": "integer"
+							},
+							"mismatch": {
+									"description": "Score penalty for mismatched pairs",
+									"type": "integer"
+							},
+							"acceptedPairs": {
+								"type": "array",
+								"items": {
+									"type": "array",
+									"items": {
+										"type": "string",
+										"pattern": "^[-ACTG]+$"
+									},
+									"minItems": 1
+								},
+								"minItems": 1,
+								"maxItems": 24
+							},
+							"completeRowBonusMultiplier": {
+								"description": "Score bonus multiplier for comple rows",
+								"type": "number"
+							}
+					}
+			}
+	}
+}

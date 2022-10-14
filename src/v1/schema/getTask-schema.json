@@ -1,0 +1,40 @@
+{
+	"type": "object",
+	"required": ["uid", "game", "player", "task"],
+	"additionalProperties": false,
+	"properties": {
+		"uid": {
+			"description": "The unique identifier of the request",
+			"type": "string"
+		},
+		"game": {
+			"description": "The code given by MMOS for the game client for identification",
+			"type": "string"
+		},
+		"player": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"accountCode": {
+					"description": "The accountCode of the player",
+					"type": "string"
+				}
+			}
+		},
+		"task": {
+			"type": "object",
+			"required": ["id", "run", "project", "isTrainingSet", "difficulty", "assets"],
+			"additionalProperties": false,
+			"properties": {
+				"id": { "type": "integer", "description": "Unique task ID" },
+				"run": { "type": "integer", "description": "Run cycle serial" },
+				"project": { "description": "Project code", "type": "string" },
+				"isTrainingSet": { "description": "Solution is provided for this task", "type": "boolean" },
+				"difficulty": { "description": "The difficulty-level of the task as established by the researchers.", "type": ["integer"] },
+				"assets": { "description": "The description of assets connected to tasks. Exact structure defined per project.", "type": ["object", "array"] },
+				"info": { "description": "Additional info about the task. Exact structure defined per project.", "type": ["object"] },
+				"solution": { "description": "The solution of the citizen science task. Exact structure defined per project.", "type": ["object", "array"] }
+			}
+		}
+	}
+}

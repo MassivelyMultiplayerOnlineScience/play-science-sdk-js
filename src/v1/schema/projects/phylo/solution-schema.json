@@ -1,0 +1,8 @@
+{
+	"description": "It will contain the puzzle setup that is paired with the parScore",
+	"type": "array",
+	"items": { 
+		"type": "string",
+		"pattern": "^[-ACTG]+$"
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"source": ".",
+	"includes": ["\\.*dist/.*\\.js$"],
+	"excludes": [
+		"\\.*node_modules/.*\\.js$",
+		"\\.*doc/.*\\.js$",
+		"\\.*test/.*\\.js$"
+	],
+  "destination": "./doc/source/",
+  "plugins": [
+    {
+			"name": "esdoc-standard-plugin",
+			"option": {
+				"unexportedIdentifier": {"enable": true},
+				"brand": {
+					"title": "Play Science API SDK - Javascript edition",
+					"description": "",
+					"repository": "https://github.com/play-science-sdk-js.git",
+					"site": "http://play-science.app",
+					"author": "http://ch.linkedin.com/in/szantner/en"
+				}
+			}
+		}
+  ]
+}

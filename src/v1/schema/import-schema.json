@@ -1,0 +1,19 @@
+{
+	"type": "array",
+	"description": "List of task metadata",
+	"items": {
+		"description": "Task metadata",
+		"type": "object",
+		"required": ["id", "isTrainingSet", "difficulty", "assets"],
+		"additionalProperties": false,
+		"properties": {
+			"id": { "type": "integer", "description": "Unique task ID" },
+			"isTrainingSet": { "description": "Solution is provided for this task", "type": "boolean" },
+			"difficulty": { "description": "The difficulty-level of the task as established by the researchers.", "type": ["integer"] },
+			"assets": { "description": "The description of assets connected to tasks. Exact structure defined per project.", "type": ["object", "array"] },
+			"info": { "description": "Additional info about the task. Exact structure defined per project.", "type": ["object"] },
+			"solution": { "description": "The solution of the citizen science task. Exact structure defined per project.", "type": ["object", "array"] }
+		}
+
+	}
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"IClassification.d.ts","sourceRoot":"","sources":["../../../src/v1/types/IClassification.ts"],"names":[],"mappings":"AAEA,MAAM,WAAW,eAAe;IAC/B,IAAI,EAAE,MAAM,CAAC;IACb,MAAM,EAAE,MAAM,CAAC;IACf,WAAW,EAAE,MAAM,GAAG,IAAI,CAAC;IAC3B,IAAI,EAAE;QACL,EAAE,EAAE,MAAM,CAAC;QACX,MAAM,EAAE,GAAG,CAAA;KACX,CAAC;IACF,aAAa,EAAE,GAAG,CAAA;CAClB"}

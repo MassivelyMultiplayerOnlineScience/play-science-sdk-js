@@ -1,0 +1,36 @@
+{
+	"type": "object",
+	"description": "All the circumstantial data of the classification",
+	"required": ["t", "colors"],
+	"additionalProperties": false,
+	"properties": {
+			"t": {
+					"type": "integer",
+					"description": "The total net time the user spent with solving the puzzle in ms"
+			},
+			"colors": {
+					"type": "object",
+					"description": "The color scheme",
+					"required": ["A", "C", "T", "G"],
+					"additionalProperties": false,
+					"properties": {
+						"A": {
+							"type": "string",
+							"pattern": "^[rgby]$"
+						},
+						"C": {
+							"type": "string",
+							"pattern": "^[rgby]$"
+						},
+						"T": {
+							"type": "string",
+							"pattern": "^[rgby]$"
+						},
+						"G": {
+							"type": "string",
+							"pattern": "^[rgby]$"
+						}
+					}
+			}
+	}
+}

@@ -1,0 +1,8 @@
+{
+	"description": "The original setup of the puzzle from Phylo",
+	"type": "array",
+	"items": { 
+		"type": "string",
+		"pattern": "^[-ACTG]+$"
+	}
+}

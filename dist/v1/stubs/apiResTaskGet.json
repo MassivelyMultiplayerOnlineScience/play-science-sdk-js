@@ -1,0 +1,41 @@
+{
+    "uid": "62c132a63e36cd8ef0ab1866c1e67d156404e9ef",
+    "game": "play-science-app",
+    "player": {
+        "code": "player-one",
+        "score": 0.789,
+        "scoreChange": 0.0023,
+        "scoredAt": "2022-09-01T18:25:43.511Z"
+    },
+    "task": {
+        "id": 90503441,
+        "run": 1,
+        "project": "mcgill-phylo-gsq",
+        "isTrainingSet": false,
+        "difficulty": 2,
+        "assets": ["TACG---", "TCG----", "TCT----", "CCAG---", "GGT----", "CGT----"],
+        "info": {
+            "parScore": 10,
+            "parScoreSolution": ["TACG---", "TCG----", "TC-T---", "CCAG---", "G-GT---", "C-GT---"],
+            "scoring": {
+                "match": 1,
+                "version": "GSQ",
+                "mismatch": -1,
+                "gapPenalty": -3,
+                "maxGapCount": 9,
+                "acceptedPairs": [["G", "T"], ["-", "T"], ["-", "G"], ["A", "T"], ["C", "T"], ["T", "C"], ["G", "T"], ["A", "C"]],
+                "gapLengthPenalty": -1,
+                "completeRowBonusMultiplier": 1.15
+            },
+            "highScore": 10,
+            "highScoreSolution": {
+                "skip": false,
+                "moves": ["C2+;6121", "C2-;968", "C1+;753", "D1+;634", "E2+;2125"],
+                "score": 10,
+                "start": ["TCG----", "TACG---", "GGT----", "CGT----", "TCT----", "CCAG---"],
+                "shuffle": [["A", "B"], ["B", "A"], ["C", "E"], ["D", "F"], ["E", "C"], ["F", "D"]],
+                "solution": ["TCG", "TACG", "G-GT", "C-GT", "TC-T", "CCAG"]
+            }
+        }
+    }
+}

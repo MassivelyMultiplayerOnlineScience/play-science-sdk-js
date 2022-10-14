@@ -1,0 +1,53 @@
+{
+	"type": "object",
+	"required": ["solution", "start", "moves", "shuffle"],
+	"additionalProperties": false,
+	"properties": {
+		"solution": {
+			"description": "User solution",
+			"type": "array",
+			"items": { 
+				"type": "string",
+				"pattern": "^[-ACTG]+$"
+			}
+		},
+		"start": {
+			"description": "Shuffled puzzle presented to user",
+			"type": "array",
+			"items": { 
+				"type": "string",
+				"pattern": "^[-ACTG]+$"
+			}
+		},
+		"moves": {
+			"description": "User moves that leads from 'start' to 'solution'",
+			"type": "array",
+			"items": { 
+				"type": "string",
+				"pattern": "^[A-Z][0-9]{1,2}[+-];[0-9]{1,7}$"
+			}
+		},
+		"shuffle": {
+			"type": "array",
+			"items": {
+				"type": "array",
+				"items": {
+					"type": "string",
+					"pattern": "^[A-Z]$"
+				},
+				"minItems": 2,
+				"maxItems": 2
+			},
+			"minItems": 0,
+			"maxItems": 20
+		},
+		"score": {
+			"description": "The result score calculated by gearbox",
+			"type": "number"
+		},
+		"skip": {
+			"description": "True if the puzzle is being skipped",
+			"type": "boolean"
+		}
+	}
+}
