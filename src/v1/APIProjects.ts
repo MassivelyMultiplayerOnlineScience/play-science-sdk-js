@@ -27,25 +27,6 @@ export default class APIProjects {
 		};
 	}
 
-	public static async playerReset(
-		options: { projectCode: string }):
-		Promise< { uid: string } > {
-
-		const { projectCode } = options;
-		const response = await API.call({
-			requestOptions: {
-				url: 'projects/${projectCode}/players/reset',
-				parameters: { projectCode: projectCode}
-			}
-		});
-
-		API.responseValidator(response);
-
-		return {
-			uid: response.data.body.uid
-		};
-	}
-
 	public static async getTips(
 		options: { projectCode: string, playerCode: string }):
 		Promise< { uid: string, tips: TLocalizedString[] } > {

@@ -22,7 +22,7 @@ export default class APIPlayers {
 
 		const response = await API.call({
 			requestOptions: {
-				url: "games/${gameCode}/players/get"
+				url: "players/get"
 			}
 		});
 
@@ -41,17 +41,36 @@ export default class APIPlayers {
 		const { playerCode } = options;
 		const response = await API.call({
 			requestOptions: {
-				url: "players/${playerCode}/projects",
+				url: "players/projects",
 				parameters: { playerCode: playerCode }
 			}
 		});
 
 		API.responseValidator(response);
 
-	return {
-		uid: response.data.body.uid,
-		projects: response.data.body.projects
-	};
-}
+		return {
+			uid: response.data.body.uid,
+			projects: response.data.body.projects
+		};
+	}
+
+	public static async projectReset(
+		options: { projectCode: string }):
+		Promise< { uid: string } > {
+
+		const { projectCode } = options;
+		const response = await API.call({
+			requestOptions: {
+				url: 'players/projects/${projectCode}/reset',
+				parameters: { projectCode: projectCode}
+			}
+		});
+
+		API.responseValidator(response);
+
+		return {
+			uid: response.data.body.uid
+		};
+	}
 
 }
