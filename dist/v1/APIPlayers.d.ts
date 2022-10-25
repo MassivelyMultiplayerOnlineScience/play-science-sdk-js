@@ -11,7 +11,7 @@ export default class APIPlayers {
             oAuthData: oAuthData
         });
     */
-    static get(): Promise<{
+    static authenticate(): Promise<{
         uid: string;
         player: TPlayer;
     }>;
@@ -20,6 +20,12 @@ export default class APIPlayers {
     }): Promise<{
         uid: string;
         projects: TPlayerProject[];
+    }>;
+    static projectReset(options: {
+        playerCode: string;
+        projectCode: string;
+    }): Promise<{
+        uid: string;
     }>;
 }
 //# sourceMappingURL=APIPlayers.d.ts.map

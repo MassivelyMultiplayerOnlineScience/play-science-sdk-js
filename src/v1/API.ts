@@ -1,11 +1,9 @@
 import { interpolateTemplate } from 'src/lib/tools';
 
-import APIClassifications from './APIClassifications';
 import APIGames from './APIGames';
 import APIPlayers from './APIPlayers';
 import APIProjects from './APIProjects';
 import APIRewards from './APIRewards';
-import APITasks from './APITasks';
 import APIService from './APIService';
 
 type APIRequestOptions = {
@@ -52,11 +50,10 @@ export default class API {
 
 	public static get games() { return APIGames; }
 	public static get players() { return APIPlayers; }
-	public static get projects() { return APIProjects; }
+
 	public static get rewards() { return APIRewards; }
 
-	public static get tasks() { return APITasks; }
-	public static get classifications() { return APIClassifications; }
+	public static get projects() { return APIProjects; }
 
 	public static get service() { return APIService; }
 

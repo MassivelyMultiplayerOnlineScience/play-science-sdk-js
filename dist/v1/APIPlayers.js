@@ -49,14 +49,14 @@ var APIPlayers = /** @class */ (function () {
             oAuthData: oAuthData
         });
     */
-    APIPlayers.get = function () {
+    APIPlayers.authenticate = function () {
         return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, API.call({
                             requestOptions: {
-                                url: "games/${gameCode}/players/get"
+                                url: "players/self/authenticate"
                             }
                         })];
                     case 1:
@@ -89,6 +89,32 @@ var APIPlayers = /** @class */ (function () {
                         return [2 /*return*/, {
                                 uid: response.data.body.uid,
                                 projects: response.data.body.projects
+                            }];
+                }
+            });
+        });
+    };
+    APIPlayers.projectReset = function (options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var playerCode, projectCode, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        playerCode = options.playerCode, projectCode = options.projectCode;
+                        return [4 /*yield*/, API.call({
+                                requestOptions: {
+                                    url: 'players/${playerCode}/projects/${projectCode}/reset',
+                                    parameters: {
+                                        playerCode: playerCode,
+                                        projectCode: projectCode
+                                    }
+                                }
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        API.responseValidator(response);
+                        return [2 /*return*/, {
+                                uid: response.data.body.uid
                             }];
                 }
             });

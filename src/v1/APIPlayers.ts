@@ -17,12 +17,12 @@ export default class APIPlayers {
 			oAuthData: oAuthData
 		});
 	*/
-	public static async get():
+	public static async authenticate():
 		Promise<{ uid: string, player: TPlayer }> {
 
 		const response = await API.call({
 			requestOptions: {
-				url: "players/get"
+				url: "players/self/authenticate"
 			}
 		});
 
@@ -41,7 +41,7 @@ export default class APIPlayers {
 		const { playerCode } = options;
 		const response = await API.call({
 			requestOptions: {
-				url: "players/projects",
+				url: "players/${playerCode}/projects",
 				parameters: { playerCode: playerCode }
 			}
 		});
@@ -55,14 +55,17 @@ export default class APIPlayers {
 	}
 
 	public static async projectReset(
-		options: { projectCode: string }):
+		options: { playerCode: string, projectCode: string }):
 		Promise< { uid: string } > {
 
-		const { projectCode } = options;
+		const { playerCode, projectCode } = options;
 		const response = await API.call({
 			requestOptions: {
-				url: 'players/projects/${projectCode}/reset',
-				parameters: { projectCode: projectCode}
+				url: 'players/${playerCode}/projects/${projectCode}/reset',
+				parameters: {
+					playerCode: playerCode,
+					projectCode: projectCode
+				}
 			}
 		});
 

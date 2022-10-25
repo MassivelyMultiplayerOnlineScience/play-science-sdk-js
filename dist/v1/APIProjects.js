@@ -63,7 +63,7 @@ var APIProjects = /** @class */ (function () {
             });
         });
     };
-    APIProjects.playerReset = function (options) {
+    APIProjects.getTask = function (options) {
         return __awaiter(this, void 0, void 0, function () {
             var projectCode, response;
             return __generator(this, function (_a) {
@@ -72,15 +72,42 @@ var APIProjects = /** @class */ (function () {
                         projectCode = options.projectCode;
                         return [4 /*yield*/, API.call({
                                 requestOptions: {
-                                    url: 'projects/${projectCode}/players/reset',
+                                    url: 'projects/${projectCode}/tasks',
                                     parameters: { projectCode: projectCode }
                                 }
                             })];
                     case 1:
                         response = _a.sent();
-                        API.responseValidator(response);
+                        API.responseValidator(response, 201);
                         return [2 /*return*/, {
-                                uid: response.data.body.uid
+                                uid: response.data.body.uid,
+                                task: response.data.body.task
+                            }];
+                }
+            });
+        });
+    };
+    APIProjects.submitClassification = function (options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var projectCode, classification, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        projectCode = options.projectCode, classification = options.classification;
+                        return [4 /*yield*/, API.call({
+                                requestOptions: {
+                                    method: API.POST,
+                                    url: "projects/".concat(projectCode, "/tasks/").concat(classification.task.id, "/classifications"),
+                                    parameters: { projectCode: projectCode },
+                                    data: classification
+                                }
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        console.log(response);
+                        return [2 /*return*/, {
+                                uid: response.data.body.uid,
+                                player: response.data.body.player
                             }];
                 }
             });

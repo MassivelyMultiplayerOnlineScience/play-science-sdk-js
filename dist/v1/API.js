@@ -46,12 +46,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { interpolateTemplate } from 'src/lib/tools';
-import APIClassifications from './APIClassifications';
 import APIGames from './APIGames';
 import APIPlayers from './APIPlayers';
 import APIProjects from './APIProjects';
 import APIRewards from './APIRewards';
-import APITasks from './APITasks';
 import APIService from './APIService';
 var API = /** @class */ (function () {
     function API() {
@@ -83,23 +81,13 @@ var API = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(API, "projects", {
-        get: function () { return APIProjects; },
-        enumerable: false,
-        configurable: true
-    });
     Object.defineProperty(API, "rewards", {
         get: function () { return APIRewards; },
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(API, "tasks", {
-        get: function () { return APITasks; },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(API, "classifications", {
-        get: function () { return APIClassifications; },
+    Object.defineProperty(API, "projects", {
+        get: function () { return APIProjects; },
         enumerable: false,
         configurable: true
     });

@@ -9,7 +9,7 @@ export default class APIService {
 	public static async handshake():
 		Promise<{ uid: string }> {
 
-		const url = 'handshake';
+		const url = 'service/handshake';
 
 		const response = await API.call({
 			requestOptions: {

@@ -1,9 +1,7 @@
-import APIClassifications from './APIClassifications';
 import APIGames from './APIGames';
 import APIPlayers from './APIPlayers';
 import APIProjects from './APIProjects';
 import APIRewards from './APIRewards';
-import APITasks from './APITasks';
 import APIService from './APIService';
 declare type APIRequestOptions = {
     method?: string;
@@ -31,10 +29,8 @@ export default class API {
     }): void;
     static get games(): typeof APIGames;
     static get players(): typeof APIPlayers;
-    static get projects(): typeof APIProjects;
     static get rewards(): typeof APIRewards;
-    static get tasks(): typeof APITasks;
-    static get classifications(): typeof APIClassifications;
+    static get projects(): typeof APIProjects;
     static get service(): typeof APIService;
     static errorToString(response: any): string;
     private static buildRequest;

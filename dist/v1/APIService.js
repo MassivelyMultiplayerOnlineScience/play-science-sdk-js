@@ -46,7 +46,7 @@ var APIService = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        url = 'handshake';
+                        url = 'service/handshake';
                         return [4 /*yield*/, API.call({
                                 requestOptions: {
                                     url: url
