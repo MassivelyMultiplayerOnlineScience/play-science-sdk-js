@@ -9,11 +9,7 @@ import APIService from './APIService';
 type APIRequestOptions = {
 	method?: string;
 	url: string;
-	parameters?: {
-		projectCode?: string,
-		playerCode?: string,
-		id?: number
-	},
+	parameters?: any,
 	data?: any;
 }
 

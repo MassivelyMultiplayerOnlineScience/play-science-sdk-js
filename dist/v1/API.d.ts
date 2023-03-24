@@ -6,11 +6,7 @@ import APIService from './APIService';
 declare type APIRequestOptions = {
     method?: string;
     url: string;
-    parameters?: {
-        projectCode?: string;
-        playerCode?: string;
-        id?: number;
-    };
+    parameters?: any;
     data?: any;
 };
 export default class API {

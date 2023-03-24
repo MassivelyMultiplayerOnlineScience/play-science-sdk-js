@@ -40,23 +40,19 @@ var APIPlayers = /** @class */ (function () {
     function APIPlayers() {
     }
     /**
-    * Returns a Player object identified by the oAuthData information. Creates the Player in the database if necessary.
-    * @param {Object} options
-    * @param {Object} options.oAuthData - oAuthData for authentication
+    * Returns a Player object identified by the oAuthData information
     * @return {Promise}
     * @example
-        await api.players.get({
-            oAuthData: oAuthData
-        });
+        await api.players.authenticate();
     */
-    APIPlayers.authenticate = function () {
+    APIPlayers.login = function () {
         return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, API.call({
                             requestOptions: {
-                                url: "players/self/authenticate"
+                                url: "players/self/login"
                             }
                         })];
                     case 1:
@@ -65,6 +61,79 @@ var APIPlayers = /** @class */ (function () {
                         return [2 /*return*/, {
                                 uid: response.data.body.uid,
                                 player: response.data.body.player
+                            }];
+                }
+            });
+        });
+    };
+    /**
+    * Creates a Player object identified by the oAuthData information
+    * @return {Promise}
+    * @example
+        await api.players.create();
+    */
+    APIPlayers.create = function (options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, API.call({
+                            requestOptions: {
+                                method: "POST",
+                                url: "players/self/create",
+                                data: {
+                                    nick: options.nick
+                                }
+                            }
+                        })];
+                    case 1:
+                        response = _a.sent();
+                        API.responseValidator(response);
+                        return [2 /*return*/, {
+                                uid: response.data.body.uid,
+                                player: response.data.body.player
+                            }];
+                }
+            });
+        });
+    };
+    /**
+    * Checks whether a providerCode/subjectCode pair is linked
+    * with the Player identified by the oAuthData information
+    * @param {Object} options
+    * @param {Object} options.oAuthData - oAuthData for authentication
+    * @param {Object} options.otherProviderCode - other providerCode
+    * @param {Object} options.otherSubjectCode - other subjectCode
+    * @return {Promise}
+    * @example
+        await api.players.linked({
+            oAuthData,
+            providerCode,
+            subjectCode
+        });
+    */
+    APIPlayers.linked = function (options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var otherPlayerProviderCode, otherPlayerSubjectCode, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        otherPlayerProviderCode = options.otherPlayerProviderCode, otherPlayerSubjectCode = options.otherPlayerSubjectCode;
+                        return [4 /*yield*/, API.call({
+                                requestOptions: {
+                                    url: "players/self/linked?otherPlayerProviderCode=${otherPlayerProviderCode}&otherPlayerSubjectCode=${otherPlayerSubjectCode}",
+                                    parameters: {
+                                        otherPlayerProviderCode: otherPlayerProviderCode,
+                                        otherPlayerSubjectCode: otherPlayerSubjectCode
+                                    }
+                                }
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        API.responseValidator(response);
+                        return [2 /*return*/, {
+                                uid: response.data.body.uid,
+                                linked: response.data.body.linked
                             }];
                 }
             });
