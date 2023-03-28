@@ -115,7 +115,7 @@ var API = /** @class */ (function () {
             url: url,
             method: method || API.GET,
             headers: {
-                authorization: idToken,
+                Authorization: "Bearer ".concat(idToken),
                 'content-type': 'application/json'
             },
             data: data
