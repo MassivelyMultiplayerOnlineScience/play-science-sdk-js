@@ -81,7 +81,7 @@ export default class API {
 			url: url,
 			method: method || API.GET,
 			headers: {
-				authorization: idToken,
+				Authorization: `Bearer ${idToken}`,
 				'content-type': 'application/json'
 			},
 			data: data
