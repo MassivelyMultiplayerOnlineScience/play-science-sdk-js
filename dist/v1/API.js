@@ -104,10 +104,10 @@ var API = /** @class */ (function () {
         var url = options.url;
         var parameters = options.parameters, method = options.method, data = options.data;
         var params = __assign({}, parameters);
-        params.version = API.gameVersion;
+        params.gameVersion = API.gameVersion;
         params.gameCode = API.gameCode;
         url = interpolateTemplate(url, params);
-        var queryString = "gameCode=".concat(params.gameCode, "&version=").concat(params.version);
+        var queryString = "gameCode=".concat(params.gameCode, "&gameVersion=").concat(params.gameVersion);
         url += (!url.includes('?')) ? '?' : '&';
         url += queryString;
         url = "".concat(API.host, "/").concat(url);

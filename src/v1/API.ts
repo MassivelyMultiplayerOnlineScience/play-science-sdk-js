@@ -1,4 +1,4 @@
-import { interpolateTemplate } from 'src/lib/tools';
+import { interpolateTemplate } from '../lib/tools';
 
 import APIGames from './APIGames';
 import APIPlayers from './APIPlayers';
@@ -65,13 +65,13 @@ export default class API {
 
 		const params: any =  {...parameters};
 
-		params.version = API.gameVersion;
+		params.gameVersion = API.gameVersion;
 		params.gameCode = API.gameCode;
 
 
 		url = interpolateTemplate(url, params);
 
-		const queryString = `gameCode=${params.gameCode}&version=${params.version}`;
+		const queryString = `gameCode=${params.gameCode}&gameVersion=${params.gameVersion}`;
 		url += (!url.includes('?')) ? '?' : '&';
 		url += queryString;
 
