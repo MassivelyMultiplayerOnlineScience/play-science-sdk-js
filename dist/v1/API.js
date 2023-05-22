@@ -45,7 +45,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { interpolateTemplate } from 'src/lib/tools';
+import { interpolateTemplate } from '../lib/tools';
 import APIGames from './APIGames';
 import APIPlayers from './APIPlayers';
 import APIProjects from './APIProjects';
