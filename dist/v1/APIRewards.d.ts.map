@@ -1,1 +1,1 @@
-{"version":3,"file":"APIRewards.d.ts","sourceRoot":"","sources":["../../src/v1/APIRewards.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,OAAO,OAAO,SAAS;CAC7B"}
+{"version":3,"file":"APIRewards.d.ts","sourceRoot":"","sources":["../../src/v1/APIRewards.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,OAAO,EAAE,MAAM,0BAA0B,CAAC;AAEnD,MAAM,CAAC,OAAO,OAAO,UAAU;WACV,MAAM,IAAI,OAAO,CAAE;QAAE,GAAG,EAAE,MAAM,CAAC;QAAC,SAAS,EAAE,OAAO,EAAE,CAAA;KAAE,CAAE;CAe9E"}

@@ -1,1 +1,0 @@
-{"version":3,"file":"TPlayerOAuth.d.ts","sourceRoot":"","sources":["../../../src/v1/types/TPlayerOAuth.ts"],"names":[],"mappings":"AAAA,oBAAY,iBAAiB;IACzB,MAAM,WAAW;IACjB,QAAQ,aAAa;IACrB,KAAK,UAAU;CAClB;AAGD,oBAAY,YAAY,GAAG;IACvB,EAAE,EAAE,MAAM,CAAC;IAEd,QAAQ,EAAE,MAAM,CAAC;IAEd,WAAW,EAAE,MAAM,CAAC;IACpB,YAAY,EAAE,iBAAiB,CAAC;IAEhC,WAAW,EAAE,GAAG,CAAC;CACpB,CAAA"}

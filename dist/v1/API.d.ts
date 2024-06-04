@@ -1,9 +1,9 @@
-import APIGames from './APIGames';
+import APIMinigames from './APIMinigames';
 import APIPlayers from './APIPlayers';
-import APIProjects from './APIProjects';
 import APIRewards from './APIRewards';
 import APIService from './APIService';
-declare type APIRequestOptions = {
+import APIMMOS from './APIMMOS';
+type TAPIRequestOptions = {
     method?: string;
     url: string;
     parameters?: any;
@@ -23,16 +23,16 @@ export default class API {
         gameCode: string;
         httpRequestCallback: (httpOptions: any) => any;
     }): void;
-    static get games(): typeof APIGames;
+    static get minigames(): typeof APIMinigames;
     static get players(): typeof APIPlayers;
     static get rewards(): typeof APIRewards;
-    static get projects(): typeof APIProjects;
+    static get mmos(): typeof APIMMOS;
     static get service(): typeof APIService;
     static errorToString(response: any): string;
     private static buildRequest;
     static call(options: {
         httpOptions?: any;
-        requestOptions?: APIRequestOptions;
+        requestOptions?: TAPIRequestOptions;
     }): Promise<any>;
     static responseValidator(response?: any, acceptedStatusCode?: number): void;
 }

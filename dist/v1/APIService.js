@@ -1,4 +1,3 @@
-/* eslint-disable no-template-curly-in-string */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -14,7 +13,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -36,7 +35,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import API from './API';
-import { ServiceNotificationType } from '@mmos/play-science-types';
 var APIService = /** @class */ (function () {
     function APIService() {
     }
@@ -57,56 +55,6 @@ var APIService = /** @class */ (function () {
                         API.responseValidator(response);
                         return [2 /*return*/, {
                                 uid: response.data.body.uid
-                            }];
-                }
-            });
-        });
-    };
-    APIService.getNotifications = function (options) {
-        return __awaiter(this, void 0, void 0, function () {
-            var type, projectCode, playerCode, rewardCode, url, parameters, response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        type = options.type, projectCode = options.projectCode, playerCode = options.playerCode, rewardCode = options.rewardCode;
-                        url = '';
-                        switch (type) {
-                            case ServiceNotificationType.GENERAL:
-                                url = 'notifications?playerCode=${playerCode}';
-                                break;
-                            case ServiceNotificationType.PROJECT:
-                                url = 'notifications/project?playerCode=${playerCode}&projectCode=${projectCode}';
-                                break;
-                            case ServiceNotificationType.PROJECTS:
-                                url = 'notifications/projects?playerCode=${playerCode}';
-                                break;
-                            case ServiceNotificationType.REWARD:
-                                url = 'notifications/reward?playerCode=${playerCode}&rewardCode=${rewardCode}';
-                                break;
-                            case ServiceNotificationType.REWARDS:
-                                url = 'notifications/rewards?playerCode=${playerCode}';
-                                break;
-                            case ServiceNotificationType.PLAYER:
-                                url = 'notifications/player?playerCode=${playerCode}';
-                                break;
-                        }
-                        parameters = {
-                            playerCode: playerCode,
-                            projectCode: projectCode,
-                            rewardCode: rewardCode
-                        };
-                        return [4 /*yield*/, API.call({
-                                requestOptions: {
-                                    url: url,
-                                    parameters: parameters
-                                }
-                            })];
-                    case 1:
-                        response = _a.sent();
-                        API.responseValidator(response);
-                        return [2 /*return*/, {
-                                uid: response.data.body.uid,
-                                notifications: response.data.body.notifications
                             }];
                 }
             });

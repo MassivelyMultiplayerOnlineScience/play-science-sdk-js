@@ -1,9 +1,9 @@
 {
   "name": "@mmos/play-science-sdk-js",
-  "version": "0.0.7",
-	"private": false,
+  "version": "0.0.8",
+  "private": false,
   "license": "MIT",
-  "description": "Play Science API - Javascript SDK, © 2022 MMOS Sàrl",
+  "description": "Play Science API - Javascript SDK, © 2022-24 MMOS Sàrl",
   "homepage": "http://play-science.app",
   "author": {
     "name": "Attila Szantner",
@@ -23,16 +23,16 @@
   "devDependencies": {
     "esdoc": "^1.1.0",
     "esdoc-standard-plugin": "~1.0.0",
-    "eslint": "^8.24.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-n": "^15.3.0",
-    "eslint-plugin-promise": "^6.0.1",
+    "eslint": "^9.4.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-n": "^17.7.0",
+    "eslint-plugin-promise": "^6.2.0",
     "eslint-plugin-standard": "^5.0.0",
-    "typescript": "^4.8.4",
-		"@typescript-eslint/parser": "^5.40.0",
-		"@typescript-eslint/eslint-plugin": "^5.40.0",
-		"@mmos/play-science-types": "^0.0.1"
+    "typescript": "^5.4.5",
+    "@typescript-eslint/parser": "^7.12.0",
+    "@typescript-eslint/eslint-plugin": "^7.12.0",
+    "@mmos/play-science-types": "^0.0.3"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -40,9 +40,8 @@
     "dist"
   ],
   "scripts": {
-		"doc:source": "esdoc",
+    "doc:source": "esdoc",
     "build": "yarn lint && tsc",
-		"lint": "eslint . --ext .ts,.tsx,.js"
+    "lint": "eslint"
   }
-
 }

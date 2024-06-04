@@ -34,32 +34,61 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import API from "./API";
-var APIRewards = /** @class */ (function () {
-    function APIRewards() {
+import API from './API';
+var APIMMOS = /** @class */ (function () {
+    function APIMMOS() {
     }
-    APIRewards.getAll = function () {
+    APIMMOS.getTask = function (options) {
         return __awaiter(this, void 0, void 0, function () {
-            var response;
+            var projectCode, response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, API.call({
-                            requestOptions: {
-                                url: 'rewards',
-                            }
-                        })];
+                    case 0:
+                        projectCode = options.projectCode;
+                        return [4 /*yield*/, API.call({
+                                requestOptions: {
+                                    url: 'mmos-api/projects/${projectCode}/tasks',
+                                    parameters: { projectCode: projectCode }
+                                }
+                            })];
                     case 1:
                         response = _a.sent();
-                        API.responseValidator(response);
+                        API.responseValidator(response, 201);
                         return [2 /*return*/, {
                                 uid: response.data.body.uid,
-                                minigames: response.data.body.minigames
+                                task: response.data.body.task
                             }];
                 }
             });
         });
     };
-    return APIRewards;
+    APIMMOS.submitClassification = function (options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var projectCode, classification, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        projectCode = options.projectCode, classification = options.classification;
+                        return [4 /*yield*/, API.call({
+                                requestOptions: {
+                                    method: API.POST,
+                                    url: "mmos-api/projects/".concat(projectCode, "/tasks/").concat(classification.task.id, "/classifications"),
+                                    parameters: { projectCode: projectCode },
+                                    data: classification
+                                }
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        console.log(response);
+                        return [2 /*return*/, {
+                                uid: response.data.body.uid,
+                                player: response.data.body.player
+                            }];
+                }
+            });
+        });
+    };
+    return APIMMOS;
 }());
-export default APIRewards;
-//# sourceMappingURL=APIRewards.js.map
+export default APIMMOS;
+//# sourceMappingURL=APIMMOS.js.map

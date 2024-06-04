@@ -24,7 +24,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -46,11 +46,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { interpolateTemplate } from '../lib/tools';
-import APIGames from './APIGames';
+import APIMinigames from './APIMinigames';
 import APIPlayers from './APIPlayers';
-import APIProjects from './APIProjects';
 import APIRewards from './APIRewards';
 import APIService from './APIService';
+import APIMMOS from './APIMMOS';
 var API = /** @class */ (function () {
     function API() {
     }
@@ -71,8 +71,8 @@ var API = /** @class */ (function () {
         API.gameCode = gameCode;
         API.httpRequestCallback = httpRequestCallback;
     };
-    Object.defineProperty(API, "games", {
-        get: function () { return APIGames; },
+    Object.defineProperty(API, "minigames", {
+        get: function () { return APIMinigames; },
         enumerable: false,
         configurable: true
     });
@@ -86,8 +86,8 @@ var API = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(API, "projects", {
-        get: function () { return APIProjects; },
+    Object.defineProperty(API, "mmos", {
+        get: function () { return APIMMOS; },
         enumerable: false,
         configurable: true
     });

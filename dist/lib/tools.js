@@ -10,7 +10,6 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 function interpolateTemplate(templateString, params) {
     var names = Object.keys(params);
     var vals = Object.values(params);
-    // eslint-disable-next-line no-new-func
     return new (Function.bind.apply(Function, __spreadArray(__spreadArray([void 0], names, false), ["return `".concat(templateString, "`;")], false)))().apply(void 0, vals);
 }
 export { interpolateTemplate };

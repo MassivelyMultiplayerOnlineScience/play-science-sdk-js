@@ -1,13 +1,14 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-    "editor.tabSize": 2,
-    "editor.renderWhitespace": "boundary",
+		"editor.tabSize": 2,
+		"editor.renderWhitespace": "boundary",
 		"editor.renderControlCharacters": true,
-    "editor.trimAutoWhitespace": true,
-    "editor.insertSpaces": false,
+		"editor.trimAutoWhitespace": true,
+		"editor.insertSpaces": false,
 		"editor.detectIndentation": false,
 		"editor.codeActionsOnSave": {
-			"source.fixAll.eslint": true
+			"source.fixAll.eslint": "explicit"
 		},
-		"editor.guides.indentation": true
+		"editor.guides.indentation": true,
+		"workbench.colorTheme": "Kimbie Dark"
 }

@@ -1,0 +1,12 @@
+{
+	"recommendations": [
+		"dbaeumer.vscode-eslint",
+		"esbenp.prettier-vscode",
+
+		"mechatroner.rainbow-csv",
+
+		"editorconfig.editorconfig",
+		"fudd.toggle-zen-mode",
+		"PKief.material-icon-theme"
+	]
+}

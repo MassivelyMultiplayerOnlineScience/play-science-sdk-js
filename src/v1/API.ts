@@ -1,12 +1,13 @@
 import { interpolateTemplate } from '../lib/tools';
 
-import APIGames from './APIGames';
+import APIMinigames from './APIMinigames';
 import APIPlayers from './APIPlayers';
-import APIProjects from './APIProjects';
 import APIRewards from './APIRewards';
 import APIService from './APIService';
 
-type APIRequestOptions = {
+import APIMMOS from './APIMMOS';
+
+type TAPIRequestOptions = {
 	method?: string;
 	url: string;
 	parameters?: any,
@@ -44,12 +45,11 @@ export default class API {
 	}
 
 
-	public static get games() { return APIGames; }
+	public static get minigames() { return APIMinigames; }
 	public static get players() { return APIPlayers; }
-
 	public static get rewards() { return APIRewards; }
 
-	public static get projects() { return APIProjects; }
+	public static get mmos() { return APIMMOS; }
 
 	public static get service() { return APIService; }
 
@@ -58,12 +58,12 @@ export default class API {
 		return `ERR ${response?.status}: ${response?.data?.body?.message}`;
 	}
 
-	private static buildRequest(idToken: string | undefined, options: APIRequestOptions): any {
+	private static buildRequest(idToken: string | undefined, options: TAPIRequestOptions): any {
 
 		let { url } = options;
-		const { parameters, method, data} = options;
+		const { parameters, method, data } = options;
 
-		const params: any =  {...parameters};
+		const params: any =  { ...parameters };
 
 		params.gameVersion = API.gameVersion;
 		params.gameCode = API.gameCode;
@@ -88,7 +88,7 @@ export default class API {
 		};
 	}
 
-	public static async call(options: {httpOptions?: any, requestOptions?: APIRequestOptions}): Promise<any> {
+	public static async call(options: {httpOptions?: any, requestOptions?: TAPIRequestOptions}): Promise<any> {
 
 		const { httpOptions, requestOptions } = options;
 

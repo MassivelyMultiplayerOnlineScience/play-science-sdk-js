@@ -1,5 +1,4 @@
 import { TPlayer } from '@mmos/play-science-types';
-import { TPlayerProject } from '@mmos/play-science-types';
 export default class APIPlayers {
     /**
     * Returns a Player object identified by the oAuthData information
@@ -44,18 +43,6 @@ export default class APIPlayers {
     }): Promise<{
         uid: string;
         linked: boolean;
-    }>;
-    static getProjects(options: {
-        playerCode: string;
-    }): Promise<{
-        uid: string;
-        projects: TPlayerProject[];
-    }>;
-    static projectReset(options: {
-        playerCode: string;
-        projectCode: string;
-    }): Promise<{
-        uid: string;
     }>;
 }
 //# sourceMappingURL=APIPlayers.d.ts.map

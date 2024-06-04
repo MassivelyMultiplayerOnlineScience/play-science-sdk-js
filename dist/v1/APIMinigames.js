@@ -34,18 +34,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import API from "./API";
-var APIRewards = /** @class */ (function () {
-    function APIRewards() {
+import API from './API';
+var APIMinigames = /** @class */ (function () {
+    function APIMinigames() {
     }
-    APIRewards.getAll = function () {
+    APIMinigames.getAll = function () {
         return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, API.call({
                             requestOptions: {
-                                url: 'rewards',
+                                url: 'minigames',
                             }
                         })];
                     case 1:
@@ -59,7 +59,7 @@ var APIRewards = /** @class */ (function () {
             });
         });
     };
-    return APIRewards;
+    return APIMinigames;
 }());
-export default APIRewards;
-//# sourceMappingURL=APIRewards.js.map
+export default APIMinigames;
+//# sourceMappingURL=APIMinigames.js.map

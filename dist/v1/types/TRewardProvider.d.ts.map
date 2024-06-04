@@ -1,1 +1,0 @@
-{"version":3,"file":"TRewardProvider.d.ts","sourceRoot":"","sources":["../../../src/v1/types/TRewardProvider.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,gBAAgB,EAAE,MAAM,oBAAoB,CAAC;AAEtD,oBAAY,eAAe,GAAG;IAC7B,EAAE,EAAE,MAAM,CAAC;IACX,IAAI,EAAE,MAAM,CAAC;IACb,IAAI,EAAE,gBAAgB,CAAC;IAEvB,yBAAyB,CAAC,EAAE,GAAG,CAAC;CAChC,CAAA"}
