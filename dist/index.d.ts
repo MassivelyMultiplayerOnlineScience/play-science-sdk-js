@@ -1,3 +1,3 @@
-import API from './v1/API';
-export default API;
+import Api from './v1/Api';
+export default Api;
 //# sourceMappingURL=index.d.ts.map

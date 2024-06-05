@@ -1,8 +1,14 @@
-import API from './API';
+import Api from '../Api';
 
 import { TPlayer } from '@mmos/play-science-types';
 
-export default class APIPlayers {
+export default class PlayersApiModule {
+
+	private _api: Api;
+
+	constructor(api: Api) {
+		this._api = api;
+	}
 
 	/**
 	* Returns a Player object identified by the oAuthData information
@@ -10,16 +16,16 @@ export default class APIPlayers {
 	* @example
 		await api.players.authenticate();
 	*/
-	public static async login():
+	public async login():
 		Promise<{ uid: string, player: TPlayer }> {
 
-		const response = await API.call({
+		const response = await this._api.request({
 			requestOptions: {
 				url: 'players/self/login'
 			}
 		});
 
-		API.responseValidator(response);
+		this._api.responseValidator(response);
 
 		return {
 			uid: response.data.body.uid,
@@ -33,11 +39,11 @@ export default class APIPlayers {
 	* @example
 		await api.players.create();
 	*/
-	public static async create(
+	public async create(
 		options: {nick: string}):
 		Promise<{ uid: string, player: TPlayer }> {
 
-		const response = await API.call({
+		const response = await this._api.request({
 			requestOptions: {
 				method: "POST",
 				url: "players/self/create",
@@ -47,7 +53,7 @@ export default class APIPlayers {
 			}
 		});
 
-		API.responseValidator(response);
+		this._api.responseValidator(response);
 
 		return {
 			uid: response.data.body.uid,
@@ -70,13 +76,13 @@ export default class APIPlayers {
 			subjectCode
 		});
 	*/
-	public static async linked(
+	public async linked(
 		options: {otherPlayerProviderCode: string, otherPlayerSubjectCode: string}):
 		Promise<{ uid: string, linked: boolean }> {
 
 		const { otherPlayerProviderCode, otherPlayerSubjectCode} = options;
 
-		const response = await API.call({
+		const response = await this._api.request({
 			requestOptions: {
 				url: "players/self/linked?otherPlayerProviderCode=${otherPlayerProviderCode}&otherPlayerSubjectCode=${otherPlayerSubjectCode}",
 				parameters: {
@@ -86,7 +92,7 @@ export default class APIPlayers {
 			}
 		});
 
-		API.responseValidator(response);
+		this._api.responseValidator(response);
 
 		return {
 			uid: response.data.body.uid,

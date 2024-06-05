@@ -46,74 +46,109 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import { interpolateTemplate } from '../lib/tools';
-import APIMinigames from './APIMinigames';
-import APIPlayers from './APIPlayers';
-import APIRewards from './APIRewards';
-import APIService from './APIService';
-import APIMMOS from './APIMMOS';
-var API = /** @class */ (function () {
-    function API() {
+import MinigamesApiModule from './modules/MinigamesApiModule';
+import MMOSApiModule from './modules/MMOSApiModule';
+import PlayersApiModule from './modules/PlayersApiModule';
+import RewardsApiModule from './modules/RewardsApiModule';
+import ServiceApiModule from './modules/ServiceApiModule';
+var Api = /** @class */ (function () {
+    function Api() {
     }
-    Object.defineProperty(API, "GET", {
+    Object.defineProperty(Api, "GET", {
         get: function () { return 'GET'; },
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(API, "POST", {
+    Object.defineProperty(Api, "POST", {
         get: function () { return 'POST'; },
         enumerable: false,
         configurable: true
     });
-    API.init = function (options) {
+    Object.defineProperty(Api.prototype, "host", {
+        get: function () { return this._host; },
+        enumerable: false,
+        configurable: true
+    });
+    ;
+    Object.defineProperty(Api.prototype, "gameCode", {
+        get: function () { return this._gameCode; },
+        enumerable: false,
+        configurable: true
+    });
+    ;
+    Object.defineProperty(Api.prototype, "gameVersion", {
+        get: function () { return this._gameVersion; },
+        enumerable: false,
+        configurable: true
+    });
+    ;
+    Object.defineProperty(Api.prototype, "idToken", {
+        get: function () { return this._idToken; },
+        enumerable: false,
+        configurable: true
+    });
+    ;
+    Object.defineProperty(Api.prototype, "httpRequestCallback", {
+        get: function () { return this._httpRequestCallback; },
+        enumerable: false,
+        configurable: true
+    });
+    ;
+    Object.defineProperty(Api.prototype, "minigames", {
+        get: function () { return this._minigames; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Api.prototype, "mmos", {
+        get: function () { return this._mmos; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Api.prototype, "players", {
+        get: function () { return this._players; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Api.prototype, "rewards", {
+        get: function () { return this._rewards; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Api.prototype, "service", {
+        get: function () { return this._service; },
+        enumerable: false,
+        configurable: true
+    });
+    Api.prototype.init = function (options) {
+        this._minigames = new MinigamesApiModule(this);
+        this._mmos = new MMOSApiModule(this);
+        this._players = new PlayersApiModule(this);
+        this._rewards = new RewardsApiModule(this);
+        this._service = new ServiceApiModule(this);
         var host = options.host, gameVersion = options.gameVersion, gameCode = options.gameCode, httpRequestCallback = options.httpRequestCallback;
-        API.host = host;
-        API.gameVersion = gameVersion;
-        API.gameCode = gameCode;
-        API.httpRequestCallback = httpRequestCallback;
+        this._host = host;
+        this._gameVersion = gameVersion;
+        this._gameCode = gameCode;
+        this._httpRequestCallback = httpRequestCallback;
     };
-    Object.defineProperty(API, "minigames", {
-        get: function () { return APIMinigames; },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(API, "players", {
-        get: function () { return APIPlayers; },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(API, "rewards", {
-        get: function () { return APIRewards; },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(API, "mmos", {
-        get: function () { return APIMMOS; },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(API, "service", {
-        get: function () { return APIService; },
-        enumerable: false,
-        configurable: true
-    });
-    API.errorToString = function (response) {
+    Api.prototype.errorToString = function (response) {
         var _a, _b;
         return "ERR ".concat(response === null || response === void 0 ? void 0 : response.status, ": ").concat((_b = (_a = response === null || response === void 0 ? void 0 : response.data) === null || _a === void 0 ? void 0 : _a.body) === null || _b === void 0 ? void 0 : _b.message);
     };
-    API.buildRequest = function (idToken, options) {
+    Api.prototype.buildRequest = function (idToken, options) {
         var url = options.url;
         var parameters = options.parameters, method = options.method, data = options.data;
         var params = __assign({}, parameters);
-        params.gameVersion = API.gameVersion;
-        params.gameCode = API.gameCode;
+        params.gameVersion = this._gameVersion;
+        params.gameCode = this._gameCode;
         url = interpolateTemplate(url, params);
         var queryString = "gameCode=".concat(params.gameCode, "&gameVersion=").concat(params.gameVersion);
         url += (!url.includes('?')) ? '?' : '&';
         url += queryString;
-        url = "".concat(API.host, "/").concat(url);
+        url = "".concat(this._host, "/").concat(url);
         return {
             url: url,
-            method: method || API.GET,
+            method: method || Api.GET,
             headers: {
                 Authorization: "Bearer ".concat(idToken),
                 'content-type': 'application/json'
@@ -121,25 +156,25 @@ var API = /** @class */ (function () {
             data: data
         };
     };
-    API.call = function (options) {
+    Api.prototype.request = function (options) {
         return __awaiter(this, void 0, void 0, function () {
             var httpOptions, requestOptions, callOptions;
             return __generator(this, function (_a) {
                 httpOptions = options.httpOptions, requestOptions = options.requestOptions;
                 callOptions = httpOptions;
                 if (!callOptions)
-                    callOptions = API.buildRequest(this.idToken, requestOptions);
-                return [2 /*return*/, API.httpRequestCallback(callOptions)];
+                    callOptions = this.buildRequest(this.idToken, requestOptions);
+                return [2 /*return*/, this.httpRequestCallback(callOptions)];
             });
         });
     };
-    API.responseValidator = function (response, acceptedStatusCode) {
+    Api.prototype.responseValidator = function (response, acceptedStatusCode) {
         if (acceptedStatusCode === void 0) { acceptedStatusCode = 200; }
         if (!response || !response.data || !response.data.body || response.status !== acceptedStatusCode) {
             throw new Error("[Error ".concat(response.status, "]: ").concat(response.data.message));
         }
     };
-    return API;
+    return Api;
 }());
-export default API;
-//# sourceMappingURL=API.js.map
+export default Api;
+//# sourceMappingURL=Api.js.map

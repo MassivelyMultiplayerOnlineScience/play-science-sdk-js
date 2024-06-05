@@ -1,40 +1,50 @@
-import APIMinigames from './APIMinigames';
-import APIPlayers from './APIPlayers';
-import APIRewards from './APIRewards';
-import APIService from './APIService';
-import APIMMOS from './APIMMOS';
+import MinigamesApiModule from './modules/MinigamesApiModule';
+import MMOSApiModule from './modules/MMOSApiModule';
+import PlayersApiModule from './modules/PlayersApiModule';
+import RewardsApiModule from './modules/RewardsApiModule';
+import ServiceApiModule from './modules/ServiceApiModule';
 type TAPIRequestOptions = {
     method?: string;
     url: string;
     parameters?: any;
     data?: any;
 };
-export default class API {
-    static host: string;
-    static gameVersion: string;
-    static gameCode: string;
-    static idToken: string;
-    static httpRequestCallback: (httpOptions: any) => any;
+export default class Api {
     static get GET(): string;
     static get POST(): string;
-    static init(options: {
+    private _host;
+    get host(): string;
+    private _gameCode;
+    get gameCode(): string;
+    private _gameVersion;
+    get gameVersion(): string;
+    private _idToken;
+    get idToken(): string;
+    private _httpRequestCallback;
+    get httpRequestCallback(): (httpOptions: any) => any;
+    private _minigames;
+    get minigames(): MinigamesApiModule;
+    private _mmos;
+    get mmos(): MMOSApiModule;
+    private _players;
+    get players(): PlayersApiModule;
+    private _rewards;
+    get rewards(): RewardsApiModule;
+    private _service;
+    get service(): ServiceApiModule;
+    init(options: {
         host: string;
         gameVersion: string;
         gameCode: string;
         httpRequestCallback: (httpOptions: any) => any;
     }): void;
-    static get minigames(): typeof APIMinigames;
-    static get players(): typeof APIPlayers;
-    static get rewards(): typeof APIRewards;
-    static get mmos(): typeof APIMMOS;
-    static get service(): typeof APIService;
-    static errorToString(response: any): string;
-    private static buildRequest;
-    static call(options: {
+    errorToString(response: any): string;
+    private buildRequest;
+    request(options: {
         httpOptions?: any;
         requestOptions?: TAPIRequestOptions;
     }): Promise<any>;
-    static responseValidator(response?: any, acceptedStatusCode?: number): void;
+    responseValidator(response?: any, acceptedStatusCode?: number): void;
 }
 export {};
-//# sourceMappingURL=API.d.ts.map
+//# sourceMappingURL=Api.d.ts.map

@@ -1,11 +1,10 @@
 import { interpolateTemplate } from '../lib/tools';
 
-import APIMinigames from './APIMinigames';
-import APIPlayers from './APIPlayers';
-import APIRewards from './APIRewards';
-import APIService from './APIService';
-
-import APIMMOS from './APIMMOS';
+import MinigamesApiModule from './modules/MinigamesApiModule';
+import MMOSApiModule from './modules/MMOSApiModule';
+import PlayersApiModule from './modules/PlayersApiModule';
+import RewardsApiModule from './modules/RewardsApiModule';
+import ServiceApiModule from './modules/ServiceApiModule';
 
 type TAPIRequestOptions = {
 	method?: string;
@@ -14,60 +13,64 @@ type TAPIRequestOptions = {
 	data?: any;
 }
 
-export default class API {
-
-	public static host: string;
-
-	public static gameVersion: string;
-	public static gameCode: string;
-
-	public static idToken: string;
-	public static httpRequestCallback: (httpOptions: any) => any;
+export default class Api {
 
 	public static get GET(): string { return 'GET'; }
 	public static get POST(): string { return 'POST'; }
 
-	public static init(options: {
+	private _host: string; public get host() { return this._host; };
+
+	private _gameCode: string; public get gameCode() { return this._gameCode; };
+	private _gameVersion: string; public get gameVersion() { return this._gameVersion; };
+
+	private _idToken: string; public get idToken() { return this._idToken; };
+	private _httpRequestCallback: (httpOptions: any) => any; public get httpRequestCallback() { return this._httpRequestCallback; };
+
+
+	private _minigames: MinigamesApiModule;  public get minigames() { return this._minigames; }
+	private _mmos: MMOSApiModule;  public get mmos() { return this._mmos; }
+	private _players: PlayersApiModule;  public get players() { return this._players; }
+	private _rewards: RewardsApiModule;  public get rewards() { return this._rewards; }
+	private _service: ServiceApiModule;  public get service() { return this._service; }
+
+	public init(options: {
 		host: string;
 		gameVersion: string,
 		gameCode: string,
 		httpRequestCallback: (httpOptions: any) => any,
 	}) {
 
+		this._minigames = new MinigamesApiModule(this);
+		this._mmos = new MMOSApiModule(this);
+		this._players = new PlayersApiModule(this);
+		this._rewards = new RewardsApiModule(this);
+		this._service = new ServiceApiModule(this);
+
 		const {host, gameVersion, gameCode, httpRequestCallback } = options;
 
-		API.host = host;
+		this._host = host;
 
-		API.gameVersion = gameVersion;
-		API.gameCode = gameCode;
+		this._gameVersion = gameVersion;
+		this._gameCode = gameCode;
 
-		API.httpRequestCallback = httpRequestCallback;
+		this._httpRequestCallback = httpRequestCallback;
 	}
 
 
-	public static get minigames() { return APIMinigames; }
-	public static get players() { return APIPlayers; }
-	public static get rewards() { return APIRewards; }
-
-	public static get mmos() { return APIMMOS; }
-
-	public static get service() { return APIService; }
 
 
-	public static errorToString(response: any) {
+	public errorToString(response: any) {
 		return `ERR ${response?.status}: ${response?.data?.body?.message}`;
 	}
 
-	private static buildRequest(idToken: string | undefined, options: TAPIRequestOptions): any {
+	private buildRequest(idToken: string | undefined, options: TAPIRequestOptions): any {
 
 		let { url } = options;
 		const { parameters, method, data } = options;
 
 		const params: any =  { ...parameters };
-
-		params.gameVersion = API.gameVersion;
-		params.gameCode = API.gameCode;
-
+		params.gameVersion = this._gameVersion;
+		params.gameCode = this._gameCode;
 
 		url = interpolateTemplate(url, params);
 
@@ -75,11 +78,11 @@ export default class API {
 		url += (!url.includes('?')) ? '?' : '&';
 		url += queryString;
 
-		url = `${API.host}/${url}`;
+		url = `${this._host}/${url}`;
 
 		return {
 			url: url,
-			method: method || API.GET,
+			method: method || Api.GET,
 			headers: {
 				Authorization: `Bearer ${idToken}`,
 				'content-type': 'application/json'
@@ -88,17 +91,17 @@ export default class API {
 		};
 	}
 
-	public static async call(options: {httpOptions?: any, requestOptions?: TAPIRequestOptions}): Promise<any> {
+	public async request(options: {httpOptions?: any, requestOptions?: TAPIRequestOptions}): Promise<any> {
 
 		const { httpOptions, requestOptions } = options;
 
 		let callOptions = httpOptions;
 
-		if (!callOptions) callOptions = API.buildRequest(this.idToken, requestOptions!);
-		return  API.httpRequestCallback(callOptions);
+		if (!callOptions) callOptions = this.buildRequest(this.idToken, requestOptions!);
+		return this.httpRequestCallback(callOptions);
 	}
 
-	public static responseValidator(response?: any, acceptedStatusCode = 200) {
+	public responseValidator(response?: any, acceptedStatusCode = 200) {
 		if (!response || !response.data || !response.data.body || response.status !== acceptedStatusCode) {
 			throw new Error(`[Error ${response!.status}]: ${response!.data.message}`);
 		}

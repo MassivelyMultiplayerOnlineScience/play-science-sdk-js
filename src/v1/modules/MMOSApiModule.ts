@@ -1,22 +1,28 @@
-import API from './API';
+import Api from '../Api';
 
 import { IClassification, ITask, TClassificationsCreateResponse } from '@mmos/play-science-types';
 
-export default class APIMMOS {
+export default class MMOSApiModule {
 
-	public static async getTask(
+	private _api: Api;
+
+	constructor(api: Api) {
+		this._api = api;
+	}
+
+	public async getTask(
 		options: { projectCode: string, difficulty?: number | undefined }):
 		Promise<{ uid: string, task: ITask }> {
 
 		const { projectCode } = options;
-		const response = await API.call({
+		const response = await this._api.request({
 			requestOptions: {
 				url: 'mmos-api/projects/${projectCode}/tasks',
 				parameters: { projectCode: projectCode }
 			}
 		});
 
-		API.responseValidator(response, 201);
+		this._api.responseValidator(response, 201);
 
 		return {
 			uid: response.data.body.uid,
@@ -24,14 +30,14 @@ export default class APIMMOS {
 		};
 	}
 
-	public static async submitClassification(
+	public async submitClassification(
 		options: { projectCode: string, classification: IClassification}):
 		Promise<TClassificationsCreateResponse> {
 
 		const { projectCode, classification } = options;
-		const response = await API.call({
+		const response = await this._api.request({
 			requestOptions: {
-				method: API.POST,
+				method: Api.POST,
 				url: `mmos-api/projects/${projectCode}/tasks/${classification.task.id}/classifications`,
 				parameters: { projectCode: projectCode },
 				data: classification

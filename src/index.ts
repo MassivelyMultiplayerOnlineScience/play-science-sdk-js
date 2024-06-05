@@ -1,5 +1,5 @@
 'use strict';
 
-import API from './v1/API';
+import Api from './v1/Api';
 
-export default API;
+export default Api;

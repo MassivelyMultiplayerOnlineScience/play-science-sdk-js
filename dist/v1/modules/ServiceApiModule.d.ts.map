@@ -1,0 +1,1 @@
+{"version":3,"file":"ServiceApiModule.d.ts","sourceRoot":"","sources":["../../../src/v1/modules/ServiceApiModule.ts"],"names":[],"mappings":"AAAA,OAAO,GAAG,MAAM,QAAQ,CAAC;AAEzB,MAAM,CAAC,OAAO,OAAO,gBAAgB;IAEpC,OAAO,CAAC,IAAI,CAAM;gBAEN,GAAG,EAAE,GAAG;IAIP,SAAS,IACrB,OAAO,CAAC;QAAE,GAAG,EAAE,MAAM,CAAA;KAAE,CAAC;CAkBzB"}
