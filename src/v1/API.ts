@@ -6,7 +6,7 @@ import PlayersApiModule from './modules/PlayersApiModule';
 import RewardsApiModule from './modules/RewardsApiModule';
 import ServiceApiModule from './modules/ServiceApiModule';
 
-type TAPIRequestOptions = {
+type TApiRequestOptions = {
 	method?: string;
 	url: string;
 	parameters?: any,
@@ -63,7 +63,7 @@ export default class Api {
 		return `ERR ${response?.status}: ${response?.data?.body?.message}`;
 	}
 
-	private buildRequest(idToken: string | undefined, options: TAPIRequestOptions): any {
+	private buildRequest(idToken: string | undefined, options: TApiRequestOptions): any {
 
 		let { url } = options;
 		const { parameters, method, data } = options;
@@ -91,7 +91,7 @@ export default class Api {
 		};
 	}
 
-	public async request(options: {httpOptions?: any, requestOptions?: TAPIRequestOptions}): Promise<any> {
+	public async request(options: {httpOptions?: any, requestOptions?: TApiRequestOptions}): Promise<any> {
 
 		const { httpOptions, requestOptions } = options;
 

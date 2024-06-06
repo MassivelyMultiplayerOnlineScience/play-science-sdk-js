@@ -3,7 +3,7 @@ import MMOSApiModule from './modules/MMOSApiModule';
 import PlayersApiModule from './modules/PlayersApiModule';
 import RewardsApiModule from './modules/RewardsApiModule';
 import ServiceApiModule from './modules/ServiceApiModule';
-type TAPIRequestOptions = {
+type TApiRequestOptions = {
     method?: string;
     url: string;
     parameters?: any;
@@ -42,7 +42,7 @@ export default class Api {
     private buildRequest;
     request(options: {
         httpOptions?: any;
-        requestOptions?: TAPIRequestOptions;
+        requestOptions?: TApiRequestOptions;
     }): Promise<any>;
     responseValidator(response?: any, acceptedStatusCode?: number): void;
 }
