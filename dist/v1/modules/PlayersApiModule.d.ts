@@ -1,4 +1,4 @@
-import Api from '../Api';
+import { Api } from '../Api';
 import { TPlayer } from '@mmos/play-science-types';
 export default class PlayersApiModule {
     private _api;

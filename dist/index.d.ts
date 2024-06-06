@@ -1,3 +1,2 @@
-import Api from './v1/Api';
-export default Api;
+export { Api, TApiRequestOptions } from './v1/Api';
 //# sourceMappingURL=index.d.ts.map

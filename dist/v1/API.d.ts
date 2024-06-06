@@ -3,13 +3,13 @@ import MMOSApiModule from './modules/MMOSApiModule';
 import PlayersApiModule from './modules/PlayersApiModule';
 import RewardsApiModule from './modules/RewardsApiModule';
 import ServiceApiModule from './modules/ServiceApiModule';
-type TApiRequestOptions = {
+export type TApiRequestOptions = {
     method?: string;
     url: string;
     parameters?: any;
     data?: any;
 };
-export default class Api {
+export declare class Api {
     static get GET(): string;
     static get POST(): string;
     private _host;
@@ -46,5 +46,4 @@ export default class Api {
     }): Promise<any>;
     responseValidator(response?: any, acceptedStatusCode?: number): void;
 }
-export {};
 //# sourceMappingURL=Api.d.ts.map

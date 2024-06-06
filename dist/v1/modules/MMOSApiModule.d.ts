@@ -1,4 +1,4 @@
-import Api from '../Api';
+import { Api } from '../Api';
 import { IClassification, ITask, TClassificationsCreateResponse } from '@mmos/play-science-types';
 export default class MMOSApiModule {
     private _api;

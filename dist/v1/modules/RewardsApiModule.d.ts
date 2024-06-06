@@ -1,4 +1,4 @@
-import Api from "../Api";
+import { Api } from '../Api';
 import { TReward } from "@mmos/play-science-types";
 export default class RewardsApiModule {
     private _api;

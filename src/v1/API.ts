@@ -6,14 +6,14 @@ import PlayersApiModule from './modules/PlayersApiModule';
 import RewardsApiModule from './modules/RewardsApiModule';
 import ServiceApiModule from './modules/ServiceApiModule';
 
-type TApiRequestOptions = {
+export type TApiRequestOptions = {
 	method?: string;
 	url: string;
 	parameters?: any,
 	data?: any;
 }
 
-export default class Api {
+export class Api {
 
 	public static get GET(): string { return 'GET'; }
 	public static get POST(): string { return 'POST'; }

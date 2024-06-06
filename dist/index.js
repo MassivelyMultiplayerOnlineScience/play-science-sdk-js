@@ -1,4 +1,3 @@
 'use strict';
-import Api from './v1/Api';
-export default Api;
+export { Api } from './v1/Api';
 //# sourceMappingURL=index.js.map

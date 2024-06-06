@@ -1,5 +1,5 @@
 import { TMinigame } from '@mmos/play-science-types';
-import Api from '../Api';
+import { Api } from '../Api';
 
 export default class MinigamesApiModule {
 

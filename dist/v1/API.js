@@ -176,5 +176,5 @@ var Api = /** @class */ (function () {
     };
     return Api;
 }());
-export default Api;
+export { Api };
 //# sourceMappingURL=Api.js.map
