@@ -44,16 +44,13 @@ var RewardsApiModule = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this._api.request({
-                            requestOptions: {
-                                url: 'rewards',
-                            }
+                            url: 'rewards',
                         })];
                     case 1:
                         response = _a.sent();
-                        this._api.responseValidator(response);
                         return [2 /*return*/, {
-                                uid: response.data.body.uid,
-                                minigames: response.data.body.minigames
+                                uid: response.data.uid,
+                                minigames: response.data.minigames
                             }];
                 }
             });

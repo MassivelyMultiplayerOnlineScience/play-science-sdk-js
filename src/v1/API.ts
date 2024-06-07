@@ -1,4 +1,4 @@
-import { interpolateTemplate } from '../lib/tools';
+import axios from 'axios';
 
 import MinigamesApiModule from './modules/MinigamesApiModule';
 import MMOSApiModule from './modules/MMOSApiModule';
@@ -9,8 +9,8 @@ import ServiceApiModule from './modules/ServiceApiModule';
 export type TApiRequestOptions = {
 	method?: string;
 	url: string;
-	parameters?: any,
 	data?: any;
+	params?: any;
 }
 
 export class Api {
@@ -18,26 +18,40 @@ export class Api {
 	public static get GET(): string { return 'GET'; }
 	public static get POST(): string { return 'POST'; }
 
-	private _host: string; public get host() { return this._host; };
+	public static get HEADER_GAMECODE(): string { return 'X-PlayScience-GameCode'; }
+	public static get HEADER_GAMEVERSION(): string { return 'X-PlayScience-GameVersion'; }
 
-	private _gameCode: string; public get gameCode() { return this._gameCode; };
-	private _gameVersion: string; public get gameVersion() { return this._gameVersion; };
+	private _mockRequests: boolean; public get mockRequests() { return this._mockRequests; };
+	private _mockResponseProvider: (requestOptions: TApiRequestOptions) => any; public get mockResponseProvider() { return this._mockResponseProvider; };
 
-	private _idToken: string; public get idToken() { return this._idToken; };
-	private _httpRequestCallback: (httpOptions: any) => any; public get httpRequestCallback() { return this._httpRequestCallback; };
+	private _idToken: string;
+	public get idToken() {
+		return this._idToken;
+	};
+	public set idToken(value: string) {
+		this._idToken = value;
+
+		if (value) {
+			axios.defaults.headers.common['Authorization'] = `Bearer ${value}`;
+		} else {
+			delete axios.defaults.headers.common['Authorization'];
+		}
+	}
 
 
-	private _minigames: MinigamesApiModule;  public get minigames() { return this._minigames; }
-	private _mmos: MMOSApiModule;  public get mmos() { return this._mmos; }
-	private _players: PlayersApiModule;  public get players() { return this._players; }
-	private _rewards: RewardsApiModule;  public get rewards() { return this._rewards; }
-	private _service: ServiceApiModule;  public get service() { return this._service; }
+	private _minigames: MinigamesApiModule; public get minigames() { return this._minigames; }
+	private _mmos: MMOSApiModule; public get mmos() { return this._mmos; }
+	private _players: PlayersApiModule; public get players() { return this._players; }
+	private _rewards: RewardsApiModule; public get rewards() { return this._rewards; }
+	private _service: ServiceApiModule; public get service() { return this._service; }
 
 	public init(options: {
 		host: string;
 		gameVersion: string,
 		gameCode: string,
-		httpRequestCallback: (httpOptions: any) => any,
+
+		mockRequests?: boolean,
+		mockResponseProvider?: (requestOptions: TApiRequestOptions) => any
 	}) {
 
 		this._minigames = new MinigamesApiModule(this);
@@ -46,65 +60,34 @@ export class Api {
 		this._rewards = new RewardsApiModule(this);
 		this._service = new ServiceApiModule(this);
 
-		const {host, gameVersion, gameCode, httpRequestCallback } = options;
 
-		this._host = host;
+		const { host, gameVersion, gameCode, mockRequests, mockResponseProvider } = options;
 
-		this._gameVersion = gameVersion;
-		this._gameCode = gameCode;
+		axios.defaults.baseURL = host;
+		axios.defaults.headers.common['content-type'] = 'application/json';
+		axios.defaults.headers.common['X-PlayScience-GameCode'] = gameCode;
+		axios.defaults.headers.common['X-PlayScience-GameVersion'] = gameVersion;
 
-		this._httpRequestCallback = httpRequestCallback;
+		this._mockRequests = mockRequests || false;
+		this._mockResponseProvider = mockResponseProvider;
 	}
 
+	public async request(requestOptions: TApiRequestOptions, expectedStatusCode: number = 200): Promise<any> {
 
+		let response;
 
-
-	public errorToString(response: any) {
-		return `ERR ${response?.status}: ${response?.data?.body?.message}`;
-	}
-
-	private buildRequest(idToken: string | undefined, options: TApiRequestOptions): any {
-
-		let { url } = options;
-		const { parameters, method, data } = options;
-
-		const params: any =  { ...parameters };
-		params.gameVersion = this._gameVersion;
-		params.gameCode = this._gameCode;
-
-		url = interpolateTemplate(url, params);
-
-		const queryString = `gameCode=${params.gameCode}&gameVersion=${params.gameVersion}`;
-		url += (!url.includes('?')) ? '?' : '&';
-		url += queryString;
-
-		url = `${this._host}/${url}`;
-
-		return {
-			url: url,
-			method: method || Api.GET,
-			headers: {
-				Authorization: `Bearer ${idToken}`,
-				'content-type': 'application/json'
-			},
-			data: data
-		};
-	}
-
-	public async request(options: {httpOptions?: any, requestOptions?: TApiRequestOptions}): Promise<any> {
-
-		const { httpOptions, requestOptions } = options;
-
-		let callOptions = httpOptions;
-
-		if (!callOptions) callOptions = this.buildRequest(this.idToken, requestOptions!);
-		return this.httpRequestCallback(callOptions);
-	}
-
-	public responseValidator(response?: any, acceptedStatusCode = 200) {
-		if (!response || !response.data || !response.data.body || response.status !== acceptedStatusCode) {
-			throw new Error(`[Error ${response!.status}]: ${response!.data.message}`);
+		if (this._mockRequests) {
+			response = await this._mockResponseProvider(requestOptions);
+		} else {
+			response = await axios(requestOptions);
 		}
+
+		if (!response || !response.data || !response.data.body || response.status !== expectedStatusCode) {
+			throw new Error(`ERR ${response!.status}: ${response!.data?.body?.message}`, {
+				cause: requestOptions
+			});}
+
+		return response;
 	}
 
 }

@@ -6,22 +6,21 @@ import ServiceApiModule from './modules/ServiceApiModule';
 export type TApiRequestOptions = {
     method?: string;
     url: string;
-    parameters?: any;
     data?: any;
+    params?: any;
 };
 export declare class Api {
     static get GET(): string;
     static get POST(): string;
-    private _host;
-    get host(): string;
-    private _gameCode;
-    get gameCode(): string;
-    private _gameVersion;
-    get gameVersion(): string;
+    static get HEADER_GAMECODE(): string;
+    static get HEADER_GAMEVERSION(): string;
+    private _mockRequests;
+    get mockRequests(): boolean;
+    private _mockResponseProvider;
+    get mockResponseProvider(): (requestOptions: TApiRequestOptions) => any;
     private _idToken;
     get idToken(): string;
-    private _httpRequestCallback;
-    get httpRequestCallback(): (httpOptions: any) => any;
+    set idToken(value: string);
     private _minigames;
     get minigames(): MinigamesApiModule;
     private _mmos;
@@ -36,14 +35,9 @@ export declare class Api {
         host: string;
         gameVersion: string;
         gameCode: string;
-        httpRequestCallback: (httpOptions: any) => any;
+        mockRequests?: boolean;
+        mockResponseProvider?: (requestOptions: TApiRequestOptions) => any;
     }): void;
-    errorToString(response: any): string;
-    private buildRequest;
-    request(options: {
-        httpOptions?: any;
-        requestOptions?: TApiRequestOptions;
-    }): Promise<any>;
-    responseValidator(response?: any, acceptedStatusCode?: number): void;
+    request(requestOptions: TApiRequestOptions, expectedStatusCode?: number): Promise<any>;
 }
 //# sourceMappingURL=Api.d.ts.map

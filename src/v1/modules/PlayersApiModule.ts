@@ -6,9 +6,7 @@ export default class PlayersApiModule {
 
 	private _api: Api;
 
-	constructor(api: Api) {
-		this._api = api;
-	}
+	constructor(api: Api) { this._api = api; }
 
 	/**
 	* Returns a Player object identified by the oAuthData information
@@ -20,16 +18,12 @@ export default class PlayersApiModule {
 		Promise<{ uid: string, player: TPlayer }> {
 
 		const response = await this._api.request({
-			requestOptions: {
-				url: 'players/self/login'
-			}
+			url: 'players/self/login'
 		});
 
-		this._api.responseValidator(response);
-
 		return {
-			uid: response.data.body.uid,
-			player: response.data.body.player
+			uid: response.data.uid,
+			player: response.data.player
 		};
 	}
 
@@ -44,20 +38,16 @@ export default class PlayersApiModule {
 		Promise<{ uid: string, player: TPlayer }> {
 
 		const response = await this._api.request({
-			requestOptions: {
-				method: "POST",
-				url: "players/self/create",
-				data: {
-					nick: options.nick
-				}
+			method: "POST",
+			url: "players/self/create",
+			data: {
+				nick: options.nick
 			}
 		});
 
-		this._api.responseValidator(response);
-
 		return {
-			uid: response.data.body.uid,
-			player: response.data.body.player
+			uid: response.data.uid,
+			player: response.data.player
 		};
 	}
 
@@ -83,20 +73,16 @@ export default class PlayersApiModule {
 		const { otherPlayerProviderCode, otherPlayerSubjectCode} = options;
 
 		const response = await this._api.request({
-			requestOptions: {
-				url: "players/self/linked?otherPlayerProviderCode=${otherPlayerProviderCode}&otherPlayerSubjectCode=${otherPlayerSubjectCode}",
-				parameters: {
-					otherPlayerProviderCode,
-					otherPlayerSubjectCode
-				}
+			url: "players/self/linked?otherPlayerProviderCode=${otherPlayerProviderCode}&otherPlayerSubjectCode=${otherPlayerSubjectCode}",
+			params: {
+				otherPlayerProviderCode,
+				otherPlayerSubjectCode
 			}
 		});
 
-		this._api.responseValidator(response);
-
 		return {
-			uid: response.data.body.uid,
-			linked: response.data.body.linked
+			uid: response.data.uid,
+			linked: response.data.linked
 		};
 	}
 

@@ -47,17 +47,14 @@ var MMOSApiModule = /** @class */ (function () {
                     case 0:
                         projectCode = options.projectCode;
                         return [4 /*yield*/, this._api.request({
-                                requestOptions: {
-                                    url: 'mmos-api/projects/${projectCode}/tasks',
-                                    parameters: { projectCode: projectCode }
-                                }
-                            })];
+                                url: 'mmos-api/projects/${projectCode}/tasks',
+                                params: { projectCode: projectCode }
+                            }, 201)];
                     case 1:
                         response = _a.sent();
-                        this._api.responseValidator(response, 201);
                         return [2 /*return*/, {
-                                uid: response.data.body.uid,
-                                task: response.data.body.task
+                                uid: response.data.uid,
+                                task: response.data.task
                             }];
                 }
             });
@@ -71,19 +68,16 @@ var MMOSApiModule = /** @class */ (function () {
                     case 0:
                         projectCode = options.projectCode, classification = options.classification;
                         return [4 /*yield*/, this._api.request({
-                                requestOptions: {
-                                    method: Api.POST,
-                                    url: "mmos-api/projects/".concat(projectCode, "/tasks/").concat(classification.task.id, "/classifications"),
-                                    parameters: { projectCode: projectCode },
-                                    data: classification
-                                }
+                                method: Api.POST,
+                                url: "mmos-api/projects/".concat(projectCode, "/tasks/").concat(classification.task.id, "/classifications"),
+                                params: { projectCode: projectCode },
+                                data: classification
                             })];
                     case 1:
                         response = _a.sent();
-                        console.log(response);
                         return [2 /*return*/, {
-                                uid: response.data.body.uid,
-                                player: response.data.body.player
+                                uid: response.data.uid,
+                                player: response.data.player
                             }];
                 }
             });

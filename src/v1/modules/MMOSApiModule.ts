@@ -6,9 +6,7 @@ export default class MMOSApiModule {
 
 	private _api: Api;
 
-	constructor(api: Api) {
-		this._api = api;
-	}
+	constructor(api: Api) { this._api = api; }
 
 	public async getTask(
 		options: { projectCode: string, difficulty?: number | undefined }):
@@ -16,17 +14,13 @@ export default class MMOSApiModule {
 
 		const { projectCode } = options;
 		const response = await this._api.request({
-			requestOptions: {
-				url: 'mmos-api/projects/${projectCode}/tasks',
-				parameters: { projectCode: projectCode }
-			}
-		});
-
-		this._api.responseValidator(response, 201);
+			url: 'mmos-api/projects/${projectCode}/tasks',
+			params: { projectCode: projectCode }
+		}, 201);
 
 		return {
-			uid: response.data.body.uid,
-			task: response.data.body.task
+			uid: response.data.uid,
+			task: response.data.task
 		};
 	}
 
@@ -36,19 +30,15 @@ export default class MMOSApiModule {
 
 		const { projectCode, classification } = options;
 		const response = await this._api.request({
-			requestOptions: {
-				method: Api.POST,
-				url: `mmos-api/projects/${projectCode}/tasks/${classification.task.id}/classifications`,
-				parameters: { projectCode: projectCode },
-				data: classification
-			}
+			method: Api.POST,
+			url: `mmos-api/projects/${projectCode}/tasks/${classification.task.id}/classifications`,
+			params: { projectCode: projectCode },
+			data: classification
 		});
 
-		console.log(response);
-
 		return {
-			uid: response.data.body.uid,
-			player: response.data.body.player
+			uid: response.data.uid,
+			player: response.data.player
 		};
 	}
 

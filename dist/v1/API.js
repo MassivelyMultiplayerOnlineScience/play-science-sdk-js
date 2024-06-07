@@ -1,14 +1,3 @@
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -45,7 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { interpolateTemplate } from '../lib/tools';
+import axios from 'axios';
 import MinigamesApiModule from './modules/MinigamesApiModule';
 import MMOSApiModule from './modules/MMOSApiModule';
 import PlayersApiModule from './modules/PlayersApiModule';
@@ -64,32 +53,41 @@ var Api = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(Api.prototype, "host", {
-        get: function () { return this._host; },
+    Object.defineProperty(Api, "HEADER_GAMECODE", {
+        get: function () { return 'X-PlayScience-GameCode'; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Api, "HEADER_GAMEVERSION", {
+        get: function () { return 'X-PlayScience-GameVersion'; },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Api.prototype, "mockRequests", {
+        get: function () { return this._mockRequests; },
         enumerable: false,
         configurable: true
     });
     ;
-    Object.defineProperty(Api.prototype, "gameCode", {
-        get: function () { return this._gameCode; },
-        enumerable: false,
-        configurable: true
-    });
-    ;
-    Object.defineProperty(Api.prototype, "gameVersion", {
-        get: function () { return this._gameVersion; },
+    Object.defineProperty(Api.prototype, "mockResponseProvider", {
+        get: function () { return this._mockResponseProvider; },
         enumerable: false,
         configurable: true
     });
     ;
     Object.defineProperty(Api.prototype, "idToken", {
-        get: function () { return this._idToken; },
-        enumerable: false,
-        configurable: true
-    });
-    ;
-    Object.defineProperty(Api.prototype, "httpRequestCallback", {
-        get: function () { return this._httpRequestCallback; },
+        get: function () {
+            return this._idToken;
+        },
+        set: function (value) {
+            this._idToken = value;
+            if (value) {
+                axios.defaults.headers.common['Authorization'] = "Bearer ".concat(value);
+            }
+            else {
+                delete axios.defaults.headers.common['Authorization'];
+            }
+        },
         enumerable: false,
         configurable: true
     });
@@ -125,54 +123,41 @@ var Api = /** @class */ (function () {
         this._players = new PlayersApiModule(this);
         this._rewards = new RewardsApiModule(this);
         this._service = new ServiceApiModule(this);
-        var host = options.host, gameVersion = options.gameVersion, gameCode = options.gameCode, httpRequestCallback = options.httpRequestCallback;
-        this._host = host;
-        this._gameVersion = gameVersion;
-        this._gameCode = gameCode;
-        this._httpRequestCallback = httpRequestCallback;
+        var host = options.host, gameVersion = options.gameVersion, gameCode = options.gameCode, mockRequests = options.mockRequests, mockResponseProvider = options.mockResponseProvider;
+        axios.defaults.baseURL = host;
+        axios.defaults.headers.common['content-type'] = 'application/json';
+        axios.defaults.headers.common['X-PlayScience-GameCode'] = gameCode;
+        axios.defaults.headers.common['X-PlayScience-GameVersion'] = gameVersion;
+        this._mockRequests = mockRequests || false;
+        this._mockResponseProvider = mockResponseProvider;
     };
-    Api.prototype.errorToString = function (response) {
-        var _a, _b;
-        return "ERR ".concat(response === null || response === void 0 ? void 0 : response.status, ": ").concat((_b = (_a = response === null || response === void 0 ? void 0 : response.data) === null || _a === void 0 ? void 0 : _a.body) === null || _b === void 0 ? void 0 : _b.message);
-    };
-    Api.prototype.buildRequest = function (idToken, options) {
-        var url = options.url;
-        var parameters = options.parameters, method = options.method, data = options.data;
-        var params = __assign({}, parameters);
-        params.gameVersion = this._gameVersion;
-        params.gameCode = this._gameCode;
-        url = interpolateTemplate(url, params);
-        var queryString = "gameCode=".concat(params.gameCode, "&gameVersion=").concat(params.gameVersion);
-        url += (!url.includes('?')) ? '?' : '&';
-        url += queryString;
-        url = "".concat(this._host, "/").concat(url);
-        return {
-            url: url,
-            method: method || Api.GET,
-            headers: {
-                Authorization: "Bearer ".concat(idToken),
-                'content-type': 'application/json'
-            },
-            data: data
-        };
-    };
-    Api.prototype.request = function (options) {
-        return __awaiter(this, void 0, void 0, function () {
-            var httpOptions, requestOptions, callOptions;
-            return __generator(this, function (_a) {
-                httpOptions = options.httpOptions, requestOptions = options.requestOptions;
-                callOptions = httpOptions;
-                if (!callOptions)
-                    callOptions = this.buildRequest(this.idToken, requestOptions);
-                return [2 /*return*/, this.httpRequestCallback(callOptions)];
+    Api.prototype.request = function (requestOptions_1) {
+        return __awaiter(this, arguments, void 0, function (requestOptions, expectedStatusCode) {
+            var response;
+            var _a, _b;
+            if (expectedStatusCode === void 0) { expectedStatusCode = 200; }
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        if (!this._mockRequests) return [3 /*break*/, 2];
+                        return [4 /*yield*/, this._mockResponseProvider(requestOptions)];
+                    case 1:
+                        response = _c.sent();
+                        return [3 /*break*/, 4];
+                    case 2: return [4 /*yield*/, axios(requestOptions)];
+                    case 3:
+                        response = _c.sent();
+                        _c.label = 4;
+                    case 4:
+                        if (!response || !response.data || !response.data.body || response.status !== expectedStatusCode) {
+                            throw new Error("ERR ".concat(response.status, ": ").concat((_b = (_a = response.data) === null || _a === void 0 ? void 0 : _a.body) === null || _b === void 0 ? void 0 : _b.message), {
+                                cause: requestOptions
+                            });
+                        }
+                        return [2 /*return*/, response];
+                }
             });
         });
-    };
-    Api.prototype.responseValidator = function (response, acceptedStatusCode) {
-        if (acceptedStatusCode === void 0) { acceptedStatusCode = 200; }
-        if (!response || !response.data || !response.data.body || response.status !== acceptedStatusCode) {
-            throw new Error("[Error ".concat(response.status, "]: ").concat(response.data.message));
-        }
     };
     return Api;
 }());

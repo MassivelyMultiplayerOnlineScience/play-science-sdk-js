@@ -5,23 +5,17 @@ export default class MinigamesApiModule {
 
 	private _api: Api;
 
-	constructor(api: Api) {
-		this._api = api;
-	}
+	constructor(api: Api) { this._api = api; }
 
-	public async getAll(): Promise< { uid: string, minigames: TMinigame[] } > {
+	public async getAll(): Promise<{ uid: string, minigames: TMinigame[] }> {
 
 		const response = await this._api.request({
-			requestOptions: {
-				url: 'minigames',
-			}
+			url: 'minigames',
 		});
 
-		this._api.responseValidator(response);
-
 		return {
-			uid: response.data.body.uid,
-			minigames: response.data.body.minigames
+			uid: response.data.uid,
+			minigames: response.data.minigames
 		};
 	}
 

@@ -40,21 +40,16 @@ var ServiceApiModule = /** @class */ (function () {
     }
     ServiceApiModule.prototype.handshake = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var url, response;
+            var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        url = 'service/handshake';
-                        return [4 /*yield*/, this._api.request({
-                                requestOptions: {
-                                    url: url
-                                }
-                            })];
+                    case 0: return [4 /*yield*/, this._api.request({
+                            url: 'service/handshake'
+                        })];
                     case 1:
                         response = _a.sent();
-                        this._api.responseValidator(response);
                         return [2 /*return*/, {
-                                uid: response.data.body.uid
+                                uid: response.data.uid
                             }];
                 }
             });

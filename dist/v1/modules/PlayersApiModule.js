@@ -50,16 +50,13 @@ var PlayersApiModule = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this._api.request({
-                            requestOptions: {
-                                url: 'players/self/login'
-                            }
+                            url: 'players/self/login'
                         })];
                     case 1:
                         response = _a.sent();
-                        this._api.responseValidator(response);
                         return [2 /*return*/, {
-                                uid: response.data.body.uid,
-                                player: response.data.body.player
+                                uid: response.data.uid,
+                                player: response.data.player
                             }];
                 }
             });
@@ -77,20 +74,17 @@ var PlayersApiModule = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this._api.request({
-                            requestOptions: {
-                                method: "POST",
-                                url: "players/self/create",
-                                data: {
-                                    nick: options.nick
-                                }
+                            method: "POST",
+                            url: "players/self/create",
+                            data: {
+                                nick: options.nick
                             }
                         })];
                     case 1:
                         response = _a.sent();
-                        this._api.responseValidator(response);
                         return [2 /*return*/, {
-                                uid: response.data.body.uid,
-                                player: response.data.body.player
+                                uid: response.data.uid,
+                                player: response.data.player
                             }];
                 }
             });
@@ -119,20 +113,17 @@ var PlayersApiModule = /** @class */ (function () {
                     case 0:
                         otherPlayerProviderCode = options.otherPlayerProviderCode, otherPlayerSubjectCode = options.otherPlayerSubjectCode;
                         return [4 /*yield*/, this._api.request({
-                                requestOptions: {
-                                    url: "players/self/linked?otherPlayerProviderCode=${otherPlayerProviderCode}&otherPlayerSubjectCode=${otherPlayerSubjectCode}",
-                                    parameters: {
-                                        otherPlayerProviderCode: otherPlayerProviderCode,
-                                        otherPlayerSubjectCode: otherPlayerSubjectCode
-                                    }
+                                url: "players/self/linked?otherPlayerProviderCode=${otherPlayerProviderCode}&otherPlayerSubjectCode=${otherPlayerSubjectCode}",
+                                params: {
+                                    otherPlayerProviderCode: otherPlayerProviderCode,
+                                    otherPlayerSubjectCode: otherPlayerSubjectCode
                                 }
                             })];
                     case 1:
                         response = _a.sent();
-                        this._api.responseValidator(response);
                         return [2 /*return*/, {
-                                uid: response.data.body.uid,
-                                linked: response.data.body.linked
+                                uid: response.data.uid,
+                                linked: response.data.linked
                             }];
                 }
             });
