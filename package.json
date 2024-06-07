@@ -1,6 +1,6 @@
 {
 	"name": "@mmos/play-science-sdk-js",
-	"version": "0.0.12",
+	"version": "0.0.13",
 	"private": false,
 	"license": "MIT",
 	"description": "Play Science API - Javascript SDK, © 2022-24 MMOS Sàrl",

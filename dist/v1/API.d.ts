@@ -24,7 +24,7 @@ export declare class Api {
     private _mockRequests;
     get mockRequests(): boolean;
     private _mockResponseProvider;
-    get mockResponseProvider(): (requestOptions: TApiRequestOptions) => any;
+    get mockResponseProvider(): (requestOptions: TApiRequestOptions, expectedStatusCode?: number) => Promise<any>;
     private _idToken;
     get idToken(): string;
     set idToken(value: string);
@@ -43,7 +43,7 @@ export declare class Api {
         gameVersion: string;
         gameCode: string;
         mockRequests?: boolean;
-        mockResponseProvider?: (requestOptions: TApiRequestOptions) => any;
+        mockResponseProvider?: (requestOptions: TApiRequestOptions, expectedStatusCode?: number) => Promise<any>;
     }): void;
     request(requestOptions: TApiRequestOptions, expectedStatusCode?: number): Promise<any>;
 }

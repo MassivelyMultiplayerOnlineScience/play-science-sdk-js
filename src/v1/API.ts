@@ -41,7 +41,7 @@ export class Api {
 	public static get HEADER_GAMEVERSION(): string { return 'X-PlayScience-GameVersion'; }
 
 	private _mockRequests: boolean; public get mockRequests() { return this._mockRequests; };
-	private _mockResponseProvider: (requestOptions: TApiRequestOptions) => any; public get mockResponseProvider() { return this._mockResponseProvider; };
+	private _mockResponseProvider: (requestOptions: TApiRequestOptions, expectedStatusCode?: number) => Promise<any>; public get mockResponseProvider() { return this._mockResponseProvider; };
 
 	private _idToken: string;
 	public get idToken() {
@@ -70,7 +70,7 @@ export class Api {
 		gameCode: string,
 
 		mockRequests?: boolean,
-		mockResponseProvider?: (requestOptions: TApiRequestOptions) => any
+		mockResponseProvider?: (requestOptions: TApiRequestOptions, expectedStatusCode?: number) => Promise<any>
 	}) {
 
 		this._minigames = new MinigamesApiModule(this);
