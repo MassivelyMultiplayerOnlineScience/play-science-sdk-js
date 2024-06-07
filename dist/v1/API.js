@@ -35,24 +35,33 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import axios from 'axios';
+import { match, compile } from 'path-to-regexp';
 import MinigamesApiModule from './modules/MinigamesApiModule';
 import MMOSApiModule from './modules/MMOSApiModule';
 import PlayersApiModule from './modules/PlayersApiModule';
 import RewardsApiModule from './modules/RewardsApiModule';
 import ServiceApiModule from './modules/ServiceApiModule';
+var ApiEndpoint = /** @class */ (function () {
+    function ApiEndpoint(url) {
+        this._url = url;
+    }
+    Object.defineProperty(ApiEndpoint.prototype, "url", {
+        get: function () { return this._url; },
+        enumerable: false,
+        configurable: true
+    });
+    ApiEndpoint.prototype.match = function (url) {
+        return match(this._url, { decode: decodeURIComponent })(url) !== false;
+    };
+    ApiEndpoint.prototype.compile = function (params) {
+        return compile(this._url, { encode: encodeURIComponent })(params);
+    };
+    return ApiEndpoint;
+}());
+export { ApiEndpoint };
 var Api = /** @class */ (function () {
     function Api() {
     }
-    Object.defineProperty(Api, "GET", {
-        get: function () { return 'GET'; },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Api, "POST", {
-        get: function () { return 'POST'; },
-        enumerable: false,
-        configurable: true
-    });
     Object.defineProperty(Api, "HEADER_GAMECODE", {
         get: function () { return 'X-PlayScience-GameCode'; },
         enumerable: false,
@@ -159,6 +168,8 @@ var Api = /** @class */ (function () {
             });
         });
     };
+    Api.GET = 'GET';
+    Api.POST = 'POST';
     return Api;
 }());
 export { Api };

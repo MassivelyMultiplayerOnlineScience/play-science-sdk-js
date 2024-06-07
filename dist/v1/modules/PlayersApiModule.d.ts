@@ -1,8 +1,9 @@
-import { Api } from '../Api';
+import { Api, ApiEndpoint } from '../Api';
 import { TPlayer } from '@mmos/play-science-types';
 export default class PlayersApiModule {
     private _api;
     constructor(api: Api);
+    readonly loginEndpoint: ApiEndpoint;
     /**
     * Returns a Player object identified by the oAuthData information
     * @return {Promise}
@@ -13,6 +14,7 @@ export default class PlayersApiModule {
         uid: string;
         player: TPlayer;
     }>;
+    readonly createEndpoint: ApiEndpoint;
     /**
     * Creates a Player object identified by the oAuthData information
     * @return {Promise}
@@ -25,6 +27,7 @@ export default class PlayersApiModule {
         uid: string;
         player: TPlayer;
     }>;
+    readonly linkedEndpoint: ApiEndpoint;
     /**
     * Checks whether a providerCode/subjectCode pair is linked
     * with the Player identified by the oAuthData information

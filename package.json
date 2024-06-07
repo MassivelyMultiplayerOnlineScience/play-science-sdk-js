@@ -1,6 +1,6 @@
 {
 	"name": "@mmos/play-science-sdk-js",
-	"version": "0.0.11",
+	"version": "0.0.12",
 	"private": false,
 	"license": "MIT",
 	"description": "Play Science API - Javascript SDK, © 2022-24 MMOS Sàrl",
@@ -16,7 +16,8 @@
 	"dependencies": {
 		"axios": "^1.7.2",
 		"bunyan": "^1.8.15",
-		"lodash": "^4.17.21"
+		"lodash": "^4.17.21",
+		"path-to-regexp": "^6.2.2"
 	},
 	"engines": {
 		"node": ">=7.10.1"

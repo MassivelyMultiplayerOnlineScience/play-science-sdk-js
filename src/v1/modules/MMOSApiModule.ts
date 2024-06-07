@@ -1,21 +1,20 @@
-import { Api } from '../Api';
+import { Api, ApiEndpoint } from '../Api';
 
 import { IClassification, ITask, TClassificationsCreateResponse } from '@mmos/play-science-types';
 
 export default class MMOSApiModule {
-
 	private _api: Api;
-
 	constructor(api: Api) { this._api = api; }
 
+	public readonly getTaskEndpoint = new ApiEndpoint('mmos-api/projects/:projectCode/tasks');
 	public async getTask(
 		options: { projectCode: string, difficulty?: number | undefined }):
 		Promise<{ uid: string, task: ITask }> {
 
 		const { projectCode } = options;
 		const response = await this._api.request({
-			url: 'mmos-api/projects/${projectCode}/tasks',
-			params: { projectCode: projectCode }
+			url: this.getTaskEndpoint.compile({ projectCode }),
+			params: { projectCode }
 		}, 201);
 
 		return {
@@ -24,6 +23,7 @@ export default class MMOSApiModule {
 		};
 	}
 
+	public readonly submitClassificationEndpoint = new ApiEndpoint('mmos-api/projects/:projectCode/tasks/:taskId/classifications');
 	public async submitClassification(
 		options: { projectCode: string, classification: IClassification}):
 		Promise<TClassificationsCreateResponse> {
@@ -31,8 +31,8 @@ export default class MMOSApiModule {
 		const { projectCode, classification } = options;
 		const response = await this._api.request({
 			method: Api.POST,
-			url: `mmos-api/projects/${projectCode}/tasks/${classification.task.id}/classifications`,
-			params: { projectCode: projectCode },
+			url: this.submitClassificationEndpoint.compile({ projectCode, taskId: classification.task.id }),
+			params: { projectCode },
 			data: classification
 		});
 

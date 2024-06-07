@@ -1,21 +1,21 @@
-import { Api } from '../Api';
+import { Api, ApiEndpoint } from '../Api';
 
 import { TReward } from "@mmos/play-science-types";
 
 export default class RewardsApiModule {
 	private _api: Api;
-
 	constructor(api: Api) { this._api = api; }
 
-	public async getAll(): Promise< { uid: string, minigames: TReward[] } > {
+	public readonly getAllEndpoint = new ApiEndpoint('rewards');
+	public async getAll(): Promise< { uid: string, rewards: TReward[] } > {
 
 		const response = await this._api.request({
-			url: 'rewards',
+			url: this.getAllEndpoint.url,
 		});
 
 		return {
 			uid: response.data.uid,
-			minigames: response.data.minigames
+			rewards: response.data.rewards
 		};
 	}
 }

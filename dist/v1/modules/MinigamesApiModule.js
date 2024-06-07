@@ -34,8 +34,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+import { ApiEndpoint } from '../Api';
 var MinigamesApiModule = /** @class */ (function () {
     function MinigamesApiModule(api) {
+        this.getAllEndpoint = new ApiEndpoint('minigames');
         this._api = api;
     }
     MinigamesApiModule.prototype.getAll = function () {
@@ -44,7 +46,7 @@ var MinigamesApiModule = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this._api.request({
-                            url: 'minigames',
+                            url: this.getAllEndpoint.url,
                         })];
                     case 1:
                         response = _a.sent();

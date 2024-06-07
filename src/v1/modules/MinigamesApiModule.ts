@@ -1,16 +1,16 @@
+import { Api, ApiEndpoint } from '../Api';
+
 import { TMinigame } from '@mmos/play-science-types';
-import { Api } from '../Api';
 
 export default class MinigamesApiModule {
-
 	private _api: Api;
-
 	constructor(api: Api) { this._api = api; }
 
+	public readonly getAllEndpoint = new ApiEndpoint('minigames');
 	public async getAll(): Promise<{ uid: string, minigames: TMinigame[] }> {
 
 		const response = await this._api.request({
-			url: 'minigames',
+			url: this.getAllEndpoint.url,
 		});
 
 		return {

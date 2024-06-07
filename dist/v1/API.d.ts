@@ -9,9 +9,16 @@ export type TApiRequestOptions = {
     data?: any;
     params?: any;
 };
+export declare class ApiEndpoint {
+    private _url;
+    get url(): string;
+    constructor(url: string);
+    match(url: string): boolean;
+    compile(params: any): string;
+}
 export declare class Api {
-    static get GET(): string;
-    static get POST(): string;
+    static readonly GET = "GET";
+    static readonly POST = "POST";
     static get HEADER_GAMECODE(): string;
     static get HEADER_GAMEVERSION(): string;
     private _mockRequests;

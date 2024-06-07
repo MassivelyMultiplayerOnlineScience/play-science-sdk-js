@@ -34,9 +34,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import { Api } from '../Api';
+import { Api, ApiEndpoint } from '../Api';
 var MMOSApiModule = /** @class */ (function () {
     function MMOSApiModule(api) {
+        this.getTaskEndpoint = new ApiEndpoint('mmos-api/projects/:projectCode/tasks');
+        this.submitClassificationEndpoint = new ApiEndpoint('mmos-api/projects/:projectCode/tasks/:taskId/classifications');
         this._api = api;
     }
     MMOSApiModule.prototype.getTask = function (options) {
@@ -47,7 +49,7 @@ var MMOSApiModule = /** @class */ (function () {
                     case 0:
                         projectCode = options.projectCode;
                         return [4 /*yield*/, this._api.request({
-                                url: 'mmos-api/projects/${projectCode}/tasks',
+                                url: this.getTaskEndpoint.compile({ projectCode: projectCode }),
                                 params: { projectCode: projectCode }
                             }, 201)];
                     case 1:
@@ -69,7 +71,7 @@ var MMOSApiModule = /** @class */ (function () {
                         projectCode = options.projectCode, classification = options.classification;
                         return [4 /*yield*/, this._api.request({
                                 method: Api.POST,
-                                url: "mmos-api/projects/".concat(projectCode, "/tasks/").concat(classification.task.id, "/classifications"),
+                                url: this.submitClassificationEndpoint.compile({ projectCode: projectCode, taskId: classification.task.id }),
                                 params: { projectCode: projectCode },
                                 data: classification
                             })];

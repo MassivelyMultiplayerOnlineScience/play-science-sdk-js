@@ -1,8 +1,9 @@
+import { Api, ApiEndpoint } from '../Api';
 import { TMinigame } from '@mmos/play-science-types';
-import { Api } from '../Api';
 export default class MinigamesApiModule {
     private _api;
     constructor(api: Api);
+    readonly getAllEndpoint: ApiEndpoint;
     getAll(): Promise<{
         uid: string;
         minigames: TMinigame[];

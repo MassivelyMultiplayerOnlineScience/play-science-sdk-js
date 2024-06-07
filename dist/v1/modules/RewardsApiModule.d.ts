@@ -1,11 +1,12 @@
-import { Api } from '../Api';
+import { Api, ApiEndpoint } from '../Api';
 import { TReward } from "@mmos/play-science-types";
 export default class RewardsApiModule {
     private _api;
     constructor(api: Api);
+    readonly getAllEndpoint: ApiEndpoint;
     getAll(): Promise<{
         uid: string;
-        minigames: TReward[];
+        rewards: TReward[];
     }>;
 }
 //# sourceMappingURL=RewardsApiModule.d.ts.map

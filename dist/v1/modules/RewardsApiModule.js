@@ -34,8 +34,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+import { ApiEndpoint } from '../Api';
 var RewardsApiModule = /** @class */ (function () {
     function RewardsApiModule(api) {
+        this.getAllEndpoint = new ApiEndpoint('rewards');
         this._api = api;
     }
     RewardsApiModule.prototype.getAll = function () {
@@ -44,13 +46,13 @@ var RewardsApiModule = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this._api.request({
-                            url: 'rewards',
+                            url: this.getAllEndpoint.url,
                         })];
                     case 1:
                         response = _a.sent();
                         return [2 /*return*/, {
                                 uid: response.data.uid,
-                                minigames: response.data.minigames
+                                rewards: response.data.rewards
                             }];
                 }
             });

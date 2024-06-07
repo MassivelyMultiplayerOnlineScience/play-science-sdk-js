@@ -34,8 +34,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+import { Api, ApiEndpoint } from '../Api';
 var PlayersApiModule = /** @class */ (function () {
     function PlayersApiModule(api) {
+        this.loginEndpoint = new ApiEndpoint('players/self/login');
+        this.createEndpoint = new ApiEndpoint('players/self/create');
+        this.linkedEndpoint = new ApiEndpoint('players/self/linked');
         this._api = api;
     }
     /**
@@ -50,7 +54,7 @@ var PlayersApiModule = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this._api.request({
-                            url: 'players/self/login'
+                            url: this.loginEndpoint.url
                         })];
                     case 1:
                         response = _a.sent();
@@ -74,8 +78,8 @@ var PlayersApiModule = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this._api.request({
-                            method: "POST",
-                            url: "players/self/create",
+                            method: Api.POST,
+                            url: this.createEndpoint.url,
                             data: {
                                 nick: options.nick
                             }
@@ -113,7 +117,7 @@ var PlayersApiModule = /** @class */ (function () {
                     case 0:
                         otherPlayerProviderCode = options.otherPlayerProviderCode, otherPlayerSubjectCode = options.otherPlayerSubjectCode;
                         return [4 /*yield*/, this._api.request({
-                                url: "players/self/linked?otherPlayerProviderCode=${otherPlayerProviderCode}&otherPlayerSubjectCode=${otherPlayerSubjectCode}",
+                                url: this.linkedEndpoint.url,
                                 params: {
                                     otherPlayerProviderCode: otherPlayerProviderCode,
                                     otherPlayerSubjectCode: otherPlayerSubjectCode

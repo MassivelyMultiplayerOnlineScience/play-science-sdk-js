@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { match, compile } from 'path-to-regexp';
 
 import MinigamesApiModule from './modules/MinigamesApiModule';
 import MMOSApiModule from './modules/MMOSApiModule';
@@ -13,10 +14,28 @@ export type TApiRequestOptions = {
 	params?: any;
 }
 
+export class ApiEndpoint {
+
+	private _url: string; public get url() { return this._url; }
+
+	constructor(url: string) {
+		this._url = url;
+	}
+
+	public match(url: string): boolean {
+		return match(this._url, { decode: decodeURIComponent })(url) !== false;
+	}
+
+	public compile(params: any): string {
+		return compile(this._url, { encode: encodeURIComponent })(params);
+	}
+
+}
+
 export class Api {
 
-	public static get GET(): string { return 'GET'; }
-	public static get POST(): string { return 'POST'; }
+	public static readonly GET = 'GET';
+	public static readonly POST = 'POST';
 
 	public static get HEADER_GAMECODE(): string { return 'X-PlayScience-GameCode'; }
 	public static get HEADER_GAMEVERSION(): string { return 'X-PlayScience-GameVersion'; }

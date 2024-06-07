@@ -1,7 +1,8 @@
-import { Api } from '../Api';
+import { Api, ApiEndpoint } from '../Api';
 export default class ServiceApiModule {
     private _api;
     constructor(api: Api);
+    readonly handshakeEndpoint: ApiEndpoint;
     handshake(): Promise<{
         uid: string;
     }>;
