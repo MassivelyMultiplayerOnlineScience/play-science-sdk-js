@@ -1,6 +1,6 @@
 {
 	"name": "@mmos/play-science-sdk-js",
-	"version": "0.0.14",
+	"version": "0.0.15",
 	"private": false,
 	"license": "MIT",
 	"description": "Play Science API - Javascript SDK, © 2022-24 MMOS Sàrl",
@@ -23,7 +23,7 @@
 		"node": ">=7.10.1"
 	},
 	"devDependencies": {
-		"@mmos/play-science-types": "^0.0.3",
+		"@mmos/play-science-types": "^0.0.4",
 		"@typescript-eslint/eslint-plugin": "^7.12.0",
 		"@typescript-eslint/parser": "^7.12.0",
 		"esdoc": "^1.1.0",

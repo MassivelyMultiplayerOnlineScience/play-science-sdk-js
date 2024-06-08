@@ -102,10 +102,11 @@ export class Api {
 			response = await axios(requestOptions);
 		}
 
-		if (!response || !response.data || !response.data.body || response.status !== expectedStatusCode) {
-			throw new Error(`ERR ${response!.status}: ${response!.data?.body?.message}`, {
+		if (!response || !response.data || response.status !== expectedStatusCode) {
+			throw new Error(`ERR ${response!.status}: ${response!.data?.message}`, {
 				cause: requestOptions
-			});}
+			});
+		}
 
 		return response;
 	}

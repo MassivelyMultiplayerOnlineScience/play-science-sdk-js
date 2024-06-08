@@ -58,10 +58,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/retry/-/retry-0.3.0.tgz#6d86b8cb322660f03d3f0aa94b99bdd8e172d570"
   integrity sha512-d2CGZR2o7fS6sWB7DG/3a95bGKQyHMACZ5aW8qGkkqQpUoZV6C0X7Pc7l4ZNMZkfNBf4VWNe9E1jRsf0G146Ew==
 
-"@mmos/play-science-types@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@mmos/play-science-types/-/play-science-types-0.0.3.tgz#f2838c2c131033a47ce9901013b447435fcd2626"
-  integrity sha512-lrpHp1+ZaXM334NdKGvz8f2r76TxmZR5y3AbPGBzWx08wqfacNgaMaoYvzem/TQbmcy4zRrrFz0hTQn2xk1Ebg==
+"@mmos/play-science-types@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@mmos/play-science-types/-/play-science-types-0.0.4.tgz#74602ca21de850ca83bc00f6a2edadbcebb17a3e"
+  integrity sha512-a3uLO6+G2JUgStPLIOgvqOP0ULxuO05c1iaqO4VvYVoBFuxbAKvP3ZmfeBiSrE+pUEhs4LwWblEVJmRkPNoiVA==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
