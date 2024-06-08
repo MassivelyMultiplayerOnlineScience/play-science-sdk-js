@@ -64,6 +64,14 @@ export class Api {
 	private _rewards: RewardsApiModule; public get rewards() { return this._rewards; }
 	private _service: ServiceApiModule; public get service() { return this._service; }
 
+	constructor() {
+		this._minigames = new MinigamesApiModule(this);
+		this._mmos = new MMOSApiModule(this);
+		this._players = new PlayersApiModule(this);
+		this._rewards = new RewardsApiModule(this);
+		this._service = new ServiceApiModule(this);
+	}
+
 	public init(options: {
 		host: string;
 		gameVersion: string,
@@ -72,13 +80,6 @@ export class Api {
 		mockRequests?: boolean,
 		mockResponseProvider?: (requestOptions: TApiRequestOptions, expectedStatusCode?: number) => Promise<any>
 	}) {
-
-		this._minigames = new MinigamesApiModule(this);
-		this._mmos = new MMOSApiModule(this);
-		this._players = new PlayersApiModule(this);
-		this._rewards = new RewardsApiModule(this);
-		this._service = new ServiceApiModule(this);
-
 
 		const { host, gameVersion, gameCode, mockRequests, mockResponseProvider } = options;
 

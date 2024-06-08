@@ -61,6 +61,11 @@ var ApiEndpoint = /** @class */ (function () {
 export { ApiEndpoint };
 var Api = /** @class */ (function () {
     function Api() {
+        this._minigames = new MinigamesApiModule(this);
+        this._mmos = new MMOSApiModule(this);
+        this._players = new PlayersApiModule(this);
+        this._rewards = new RewardsApiModule(this);
+        this._service = new ServiceApiModule(this);
     }
     Object.defineProperty(Api, "HEADER_GAMECODE", {
         get: function () { return 'X-PlayScience-GameCode'; },
@@ -127,11 +132,6 @@ var Api = /** @class */ (function () {
         configurable: true
     });
     Api.prototype.init = function (options) {
-        this._minigames = new MinigamesApiModule(this);
-        this._mmos = new MMOSApiModule(this);
-        this._players = new PlayersApiModule(this);
-        this._rewards = new RewardsApiModule(this);
-        this._service = new ServiceApiModule(this);
         var host = options.host, gameVersion = options.gameVersion, gameCode = options.gameCode, mockRequests = options.mockRequests, mockResponseProvider = options.mockResponseProvider;
         axios.defaults.baseURL = host;
         axios.defaults.headers.common['content-type'] = 'application/json';

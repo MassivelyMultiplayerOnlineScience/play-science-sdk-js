@@ -38,6 +38,7 @@ export declare class Api {
     get rewards(): RewardsApiModule;
     private _service;
     get service(): ServiceApiModule;
+    constructor();
     init(options: {
         host: string;
         gameVersion: string;
