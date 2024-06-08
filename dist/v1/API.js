@@ -143,23 +143,23 @@ var Api = /** @class */ (function () {
     Api.prototype.request = function (requestOptions_1) {
         return __awaiter(this, arguments, void 0, function (requestOptions, expectedStatusCode) {
             var response;
-            var _a, _b;
+            var _a;
             if (expectedStatusCode === void 0) { expectedStatusCode = 200; }
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         if (!this._mockRequests) return [3 /*break*/, 2];
                         return [4 /*yield*/, this._mockResponseProvider(requestOptions)];
                     case 1:
-                        response = _c.sent();
+                        response = _b.sent();
                         return [3 /*break*/, 4];
                     case 2: return [4 /*yield*/, axios(requestOptions)];
                     case 3:
-                        response = _c.sent();
-                        _c.label = 4;
+                        response = _b.sent();
+                        _b.label = 4;
                     case 4:
-                        if (!response || !response.data || !response.data.body || response.status !== expectedStatusCode) {
-                            throw new Error("ERR ".concat(response.status, ": ").concat((_b = (_a = response.data) === null || _a === void 0 ? void 0 : _a.body) === null || _b === void 0 ? void 0 : _b.message), {
+                        if (!response || !response.data || response.status !== expectedStatusCode) {
+                            throw new Error("ERR ".concat(response.status, ": ").concat((_a = response.data) === null || _a === void 0 ? void 0 : _a.message), {
                                 cause: requestOptions
                             });
                         }
