@@ -1,5 +1,6 @@
 import MinigamesApiModule from './modules/MinigamesApiModule';
 import MMOSApiModule from './modules/MMOSApiModule';
+import PartnersApiModule from './modules/PartnersApiModule';
 import PlayersApiModule from './modules/PlayersApiModule';
 import RewardsApiModule from './modules/RewardsApiModule';
 import ServiceApiModule from './modules/ServiceApiModule';
@@ -32,6 +33,8 @@ export declare class Api {
     get minigames(): MinigamesApiModule;
     private _mmos;
     get mmos(): MMOSApiModule;
+    private _partners;
+    get partners(): PartnersApiModule;
     private _players;
     get players(): PlayersApiModule;
     private _rewards;

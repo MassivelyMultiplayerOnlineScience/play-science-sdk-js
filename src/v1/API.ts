@@ -3,6 +3,7 @@ import { match, compile } from 'path-to-regexp';
 
 import MinigamesApiModule from './modules/MinigamesApiModule';
 import MMOSApiModule from './modules/MMOSApiModule';
+import PartnersApiModule from './modules/PartnersApiModule';
 import PlayersApiModule from './modules/PlayersApiModule';
 import RewardsApiModule from './modules/RewardsApiModule';
 import ServiceApiModule from './modules/ServiceApiModule';
@@ -60,6 +61,7 @@ export class Api {
 
 	private _minigames: MinigamesApiModule; public get minigames() { return this._minigames; }
 	private _mmos: MMOSApiModule; public get mmos() { return this._mmos; }
+	private _partners: PartnersApiModule; public get partners() { return this._partners; }
 	private _players: PlayersApiModule; public get players() { return this._players; }
 	private _rewards: RewardsApiModule; public get rewards() { return this._rewards; }
 	private _service: ServiceApiModule; public get service() { return this._service; }

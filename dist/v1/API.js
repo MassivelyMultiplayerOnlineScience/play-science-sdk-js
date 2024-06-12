@@ -116,6 +116,11 @@ var Api = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(Api.prototype, "partners", {
+        get: function () { return this._partners; },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(Api.prototype, "players", {
         get: function () { return this._players; },
         enumerable: false,
