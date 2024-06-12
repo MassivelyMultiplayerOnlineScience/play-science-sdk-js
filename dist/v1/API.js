@@ -38,6 +38,7 @@ import axios from 'axios';
 import { match, compile } from 'path-to-regexp';
 import MinigamesApiModule from './modules/MinigamesApiModule';
 import MMOSApiModule from './modules/MMOSApiModule';
+import PartnersApiModule from './modules/PartnersApiModule';
 import PlayersApiModule from './modules/PlayersApiModule';
 import RewardsApiModule from './modules/RewardsApiModule';
 import ServiceApiModule from './modules/ServiceApiModule';
@@ -63,6 +64,7 @@ var Api = /** @class */ (function () {
     function Api() {
         this._minigames = new MinigamesApiModule(this);
         this._mmos = new MMOSApiModule(this);
+        this._partners = new PartnersApiModule(this);
         this._players = new PlayersApiModule(this);
         this._rewards = new RewardsApiModule(this);
         this._service = new ServiceApiModule(this);

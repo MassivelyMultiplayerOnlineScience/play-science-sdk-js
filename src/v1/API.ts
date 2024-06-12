@@ -69,6 +69,7 @@ export class Api {
 	constructor() {
 		this._minigames = new MinigamesApiModule(this);
 		this._mmos = new MMOSApiModule(this);
+		this._partners = new PartnersApiModule(this);
 		this._players = new PlayersApiModule(this);
 		this._rewards = new RewardsApiModule(this);
 		this._service = new ServiceApiModule(this);
