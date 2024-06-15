@@ -41,8 +41,8 @@ export class Api {
 	public static get HEADER_GAMECODE(): string { return 'X-PlayScience-GameCode'; }
 	public static get HEADER_GAMEVERSION(): string { return 'X-PlayScience-GameVersion'; }
 
-	private _mockRequests: boolean; public get mockRequests() { return this._mockRequests; };
-	private _mockResponseProvider: (requestOptions: TApiRequestOptions, expectedStatusCode?: number) => Promise<any>; public get mockResponseProvider() { return this._mockResponseProvider; };
+	private _shortcutRequestEvaluator: (requestOptions: TApiRequestOptions) => Promise<boolean>; public get shortcutRequestEvaluator() { return this._shortcutRequestEvaluator; };
+	private _shortcutRequestCallback: (requestOptions: TApiRequestOptions, expectedStatusCode?: number) => Promise<any>; public get shortcutRequestCallback() { return this._shortcutRequestCallback; };
 
 	private _idToken: string;
 	public get idToken() {
@@ -80,27 +80,29 @@ export class Api {
 		gameVersion: string,
 		gameCode: string,
 
-		mockRequests?: boolean,
-		mockResponseProvider?: (requestOptions: TApiRequestOptions, expectedStatusCode?: number) => Promise<any>
+		shortcutRequestEvaluator?: (requestOptions: TApiRequestOptions) => Promise<boolean>,
+		shortcutRequestCallback?: (requestOptions: TApiRequestOptions, expectedStatusCode?: number) => Promise<any>
 	}) {
 
-		const { host, gameVersion, gameCode, mockRequests, mockResponseProvider } = options;
+		const { host, gameVersion, gameCode, shortcutRequestEvaluator, shortcutRequestCallback } = options;
 
 		axios.defaults.baseURL = host;
 		axios.defaults.headers.common['content-type'] = 'application/json';
 		axios.defaults.headers.common['X-PlayScience-GameCode'] = gameCode;
 		axios.defaults.headers.common['X-PlayScience-GameVersion'] = gameVersion;
 
-		this._mockRequests = mockRequests || false;
-		this._mockResponseProvider = mockResponseProvider;
+		this._shortcutRequestEvaluator = shortcutRequestEvaluator || (async () => false);
+		this._shortcutRequestCallback = shortcutRequestCallback;
 	}
 
 	public async request(requestOptions: TApiRequestOptions, expectedStatusCode: number = 200): Promise<any> {
 
 		let response;
 
-		if (this._mockRequests) {
-			response = await this._mockResponseProvider(requestOptions);
+		const shortcutRequest = await this._shortcutRequestEvaluator(requestOptions);
+
+		if (shortcutRequest) {
+			response = await this._shortcutRequestCallback(requestOptions, expectedStatusCode);
 		} else {
 			response = await axios(requestOptions);
 		}

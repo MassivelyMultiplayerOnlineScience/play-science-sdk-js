@@ -79,14 +79,14 @@ var Api = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    Object.defineProperty(Api.prototype, "mockRequests", {
-        get: function () { return this._mockRequests; },
+    Object.defineProperty(Api.prototype, "shortcutRequestEvaluator", {
+        get: function () { return this._shortcutRequestEvaluator; },
         enumerable: false,
         configurable: true
     });
     ;
-    Object.defineProperty(Api.prototype, "mockResponseProvider", {
-        get: function () { return this._mockResponseProvider; },
+    Object.defineProperty(Api.prototype, "shortcutRequestCallback", {
+        get: function () { return this._shortcutRequestCallback; },
         enumerable: false,
         configurable: true
     });
@@ -139,32 +139,37 @@ var Api = /** @class */ (function () {
         configurable: true
     });
     Api.prototype.init = function (options) {
-        var host = options.host, gameVersion = options.gameVersion, gameCode = options.gameCode, mockRequests = options.mockRequests, mockResponseProvider = options.mockResponseProvider;
+        var _this = this;
+        var host = options.host, gameVersion = options.gameVersion, gameCode = options.gameCode, shortcutRequestEvaluator = options.shortcutRequestEvaluator, shortcutRequestCallback = options.shortcutRequestCallback;
         axios.defaults.baseURL = host;
         axios.defaults.headers.common['content-type'] = 'application/json';
         axios.defaults.headers.common['X-PlayScience-GameCode'] = gameCode;
         axios.defaults.headers.common['X-PlayScience-GameVersion'] = gameVersion;
-        this._mockRequests = mockRequests || false;
-        this._mockResponseProvider = mockResponseProvider;
+        this._shortcutRequestEvaluator = shortcutRequestEvaluator || (function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+            return [2 /*return*/, false];
+        }); }); });
+        this._shortcutRequestCallback = shortcutRequestCallback;
     };
     Api.prototype.request = function (requestOptions_1) {
         return __awaiter(this, arguments, void 0, function (requestOptions, expectedStatusCode) {
-            var response;
+            var response, shortcutRequest;
             var _a;
             if (expectedStatusCode === void 0) { expectedStatusCode = 200; }
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0:
-                        if (!this._mockRequests) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this._mockResponseProvider(requestOptions)];
+                    case 0: return [4 /*yield*/, this._shortcutRequestEvaluator(requestOptions)];
                     case 1:
+                        shortcutRequest = _b.sent();
+                        if (!shortcutRequest) return [3 /*break*/, 3];
+                        return [4 /*yield*/, this._shortcutRequestCallback(requestOptions, expectedStatusCode)];
+                    case 2:
                         response = _b.sent();
-                        return [3 /*break*/, 4];
-                    case 2: return [4 /*yield*/, axios(requestOptions)];
-                    case 3:
-                        response = _b.sent();
-                        _b.label = 4;
+                        return [3 /*break*/, 5];
+                    case 3: return [4 /*yield*/, axios(requestOptions)];
                     case 4:
+                        response = _b.sent();
+                        _b.label = 5;
+                    case 5:
                         if (!response || !response.data || response.status !== expectedStatusCode) {
                             throw new Error("ERR ".concat(response.status, ": ").concat((_a = response.data) === null || _a === void 0 ? void 0 : _a.message), {
                                 cause: requestOptions

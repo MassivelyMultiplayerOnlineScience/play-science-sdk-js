@@ -22,10 +22,10 @@ export declare class Api {
     static readonly POST = "POST";
     static get HEADER_GAMECODE(): string;
     static get HEADER_GAMEVERSION(): string;
-    private _mockRequests;
-    get mockRequests(): boolean;
-    private _mockResponseProvider;
-    get mockResponseProvider(): (requestOptions: TApiRequestOptions, expectedStatusCode?: number) => Promise<any>;
+    private _shortcutRequestEvaluator;
+    get shortcutRequestEvaluator(): (requestOptions: TApiRequestOptions) => Promise<boolean>;
+    private _shortcutRequestCallback;
+    get shortcutRequestCallback(): (requestOptions: TApiRequestOptions, expectedStatusCode?: number) => Promise<any>;
     private _idToken;
     get idToken(): string;
     set idToken(value: string);
@@ -46,8 +46,8 @@ export declare class Api {
         host: string;
         gameVersion: string;
         gameCode: string;
-        mockRequests?: boolean;
-        mockResponseProvider?: (requestOptions: TApiRequestOptions, expectedStatusCode?: number) => Promise<any>;
+        shortcutRequestEvaluator?: (requestOptions: TApiRequestOptions) => Promise<boolean>;
+        shortcutRequestCallback?: (requestOptions: TApiRequestOptions, expectedStatusCode?: number) => Promise<any>;
     }): void;
     request(requestOptions: TApiRequestOptions, expectedStatusCode?: number): Promise<any>;
 }
