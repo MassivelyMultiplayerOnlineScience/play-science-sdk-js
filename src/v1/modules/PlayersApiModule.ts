@@ -87,13 +87,13 @@ export default class PlayersApiModule {
 		};
 	}
 
-	public readonly activitiesEndpoint = new ApiEndpoint('players/activities');
-	public async activitiesCommon(options: { limit?: number, offset?: number }):
+	public readonly getActivitiesCommonEndpoint = new ApiEndpoint('players/activities');
+	public async getActivitiesCommon(options: { limit?: number, offset?: number }):
 		Promise<{ uid: string, activities: TActivity[] }> {
 
 		const { limit, offset } = options;
 		const response = await this._api.request({
-			url: this.activitiesEndpoint.url,
+			url: this.getActivitiesCommonEndpoint.url,
 			params: { limit, offset }
 		});
 
@@ -103,13 +103,13 @@ export default class PlayersApiModule {
 		};
 	}
 
-	public readonly activitiesSelfEndpoint = new ApiEndpoint('players/self/activities');
-	public async activities(options: { limit?: number, offset?: number }):
+	public readonly getActivitiesEndpoint = new ApiEndpoint('players/self/activities');
+	public async getActivities(options: { limit?: number, offset?: number }):
 		Promise<{ uid: string, activities: TActivity[] }> {
 
 		const { limit, offset } = options;
 		const response = await this._api.request({
-			url: this.activitiesSelfEndpoint.url,
+			url: this.getActivitiesEndpoint.url,
 			params: { limit, offset }
 		});
 

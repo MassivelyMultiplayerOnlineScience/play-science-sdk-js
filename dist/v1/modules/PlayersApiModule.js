@@ -40,8 +40,8 @@ var PlayersApiModule = /** @class */ (function () {
         this.loginEndpoint = new ApiEndpoint('players/self/login');
         this.createEndpoint = new ApiEndpoint('players/self/create');
         this.linkedEndpoint = new ApiEndpoint('players/self/linked');
-        this.activitiesEndpoint = new ApiEndpoint('players/activities');
-        this.activitiesSelfEndpoint = new ApiEndpoint('players/self/activities');
+        this.getActivitiesCommonEndpoint = new ApiEndpoint('players/activities');
+        this.getActivitiesEndpoint = new ApiEndpoint('players/self/activities');
         this._api = api;
     }
     /**
@@ -135,7 +135,7 @@ var PlayersApiModule = /** @class */ (function () {
             });
         });
     };
-    PlayersApiModule.prototype.activitiesCommon = function (options) {
+    PlayersApiModule.prototype.getActivitiesCommon = function (options) {
         return __awaiter(this, void 0, void 0, function () {
             var limit, offset, response;
             return __generator(this, function (_a) {
@@ -143,7 +143,7 @@ var PlayersApiModule = /** @class */ (function () {
                     case 0:
                         limit = options.limit, offset = options.offset;
                         return [4 /*yield*/, this._api.request({
-                                url: this.activitiesEndpoint.url,
+                                url: this.getActivitiesCommonEndpoint.url,
                                 params: { limit: limit, offset: offset }
                             })];
                     case 1:
@@ -156,7 +156,7 @@ var PlayersApiModule = /** @class */ (function () {
             });
         });
     };
-    PlayersApiModule.prototype.activities = function (options) {
+    PlayersApiModule.prototype.getActivities = function (options) {
         return __awaiter(this, void 0, void 0, function () {
             var limit, offset, response;
             return __generator(this, function (_a) {
@@ -164,7 +164,7 @@ var PlayersApiModule = /** @class */ (function () {
                     case 0:
                         limit = options.limit, offset = options.offset;
                         return [4 /*yield*/, this._api.request({
-                                url: this.activitiesSelfEndpoint.url,
+                                url: this.getActivitiesEndpoint.url,
                                 params: { limit: limit, offset: offset }
                             })];
                     case 1:
