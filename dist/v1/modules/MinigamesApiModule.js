@@ -62,9 +62,11 @@ var MinigamesApiModule = /** @class */ (function () {
     MinigamesApiModule.prototype.get = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.getAll().then(function (_a) {
-                        var minigames = _a.minigames;
-                        return minigames.find(function (minigame) { return minigame.id === id; });
+                return [2 /*return*/, this.getAll().then(function (response) {
+                        return {
+                            uid: response.uid,
+                            minigames: response.minigames.find(function (minigame) { return minigame.id === id; })
+                        };
                     })];
             });
         });
