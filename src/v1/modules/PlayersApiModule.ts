@@ -1,6 +1,6 @@
 import { Api, ApiEndpoint } from '../Api';
 
-import { TPlayer } from '@mmos/play-science-types';
+import { TActivity, TPlayer } from '@mmos/play-science-types';
 
 export default class PlayersApiModule {
 	private _api: Api;
@@ -84,6 +84,38 @@ export default class PlayersApiModule {
 		return {
 			uid: response.data.uid,
 			linked: response.data.linked
+		};
+	}
+
+	public readonly activitiesEndpoint = new ApiEndpoint('players/activities');
+	public async activitiesCommon(options: { limit?: number, offset?: number }):
+		Promise<{ uid: string, activities: TActivity[] }> {
+
+		const { limit, offset } = options;
+		const response = await this._api.request({
+			url: this.activitiesEndpoint.url,
+			params: { limit, offset }
+		});
+
+		return {
+			uid: response.data.uid,
+			activities: response.data.activities
+		};
+	}
+
+	public readonly activitiesSelfEndpoint = new ApiEndpoint('players/self/activities');
+	public async activities(options: { limit?: number, offset?: number }):
+		Promise<{ uid: string, activities: TActivity[] }> {
+
+		const { limit, offset } = options;
+		const response = await this._api.request({
+			url: this.activitiesSelfEndpoint.url,
+			params: { limit, offset }
+		});
+
+		return {
+			uid: response.data.uid,
+			activities: response.data.activities
 		};
 	}
 

@@ -1,6 +1,6 @@
 {
 	"name": "@mmos/play-science-sdk-js",
-	"version": "0.0.19",
+	"version": "0.0.20",
 	"private": false,
 	"license": "MIT",
 	"description": "Play Science API - Javascript SDK, © 2022-24 MMOS Sàrl",
@@ -28,10 +28,10 @@
 		"@typescript-eslint/parser": "^7.13.0",
 		"esdoc": "^1.1.0",
 		"esdoc-standard-plugin": "~1.0.0",
-		"eslint": "^9.4.0",
+		"eslint": "^9.5.0",
 		"eslint-config-standard": "^17.1.0",
 		"eslint-plugin-import": "2.29.1",
-		"eslint-plugin-n": "^17.8.1",
+		"eslint-plugin-n": "^17.9.0",
 		"eslint-plugin-promise": "^6.2.0",
 		"eslint-plugin-standard": "^5.0.0",
 		"typescript": "^5.4.5"

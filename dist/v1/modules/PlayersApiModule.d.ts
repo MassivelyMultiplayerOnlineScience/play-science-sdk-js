@@ -1,5 +1,5 @@
 import { Api, ApiEndpoint } from '../Api';
-import { TPlayer } from '@mmos/play-science-types';
+import { TActivity, TPlayer } from '@mmos/play-science-types';
 export default class PlayersApiModule {
     private _api;
     constructor(api: Api);
@@ -49,6 +49,22 @@ export default class PlayersApiModule {
     }): Promise<{
         uid: string;
         linked: boolean;
+    }>;
+    readonly activitiesEndpoint: ApiEndpoint;
+    activitiesCommon(options: {
+        limit?: number;
+        offset?: number;
+    }): Promise<{
+        uid: string;
+        activities: TActivity[];
+    }>;
+    readonly activitiesSelfEndpoint: ApiEndpoint;
+    activities(options: {
+        limit?: number;
+        offset?: number;
+    }): Promise<{
+        uid: string;
+        activities: TActivity[];
     }>;
 }
 //# sourceMappingURL=PlayersApiModule.d.ts.map

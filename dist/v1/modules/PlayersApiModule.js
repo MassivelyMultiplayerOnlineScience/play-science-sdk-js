@@ -40,6 +40,8 @@ var PlayersApiModule = /** @class */ (function () {
         this.loginEndpoint = new ApiEndpoint('players/self/login');
         this.createEndpoint = new ApiEndpoint('players/self/create');
         this.linkedEndpoint = new ApiEndpoint('players/self/linked');
+        this.activitiesEndpoint = new ApiEndpoint('players/activities');
+        this.activitiesSelfEndpoint = new ApiEndpoint('players/self/activities');
         this._api = api;
     }
     /**
@@ -128,6 +130,48 @@ var PlayersApiModule = /** @class */ (function () {
                         return [2 /*return*/, {
                                 uid: response.data.uid,
                                 linked: response.data.linked
+                            }];
+                }
+            });
+        });
+    };
+    PlayersApiModule.prototype.activitiesCommon = function (options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var limit, offset, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        limit = options.limit, offset = options.offset;
+                        return [4 /*yield*/, this._api.request({
+                                url: this.activitiesEndpoint.url,
+                                params: { limit: limit, offset: offset }
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, {
+                                uid: response.data.uid,
+                                activities: response.data.activities
+                            }];
+                }
+            });
+        });
+    };
+    PlayersApiModule.prototype.activities = function (options) {
+        return __awaiter(this, void 0, void 0, function () {
+            var limit, offset, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        limit = options.limit, offset = options.offset;
+                        return [4 /*yield*/, this._api.request({
+                                url: this.activitiesSelfEndpoint.url,
+                                params: { limit: limit, offset: offset }
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        return [2 /*return*/, {
+                                uid: response.data.uid,
+                                activities: response.data.activities
                             }];
                 }
             });
