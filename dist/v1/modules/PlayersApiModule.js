@@ -40,8 +40,8 @@ var PlayersApiModule = /** @class */ (function () {
         this.loginEndpoint = new ApiEndpoint('players/self/login');
         this.createEndpoint = new ApiEndpoint('players/self/create');
         this.linkedEndpoint = new ApiEndpoint('players/self/linked');
-        this.getActivitiesCommonEndpoint = new ApiEndpoint('players/activities');
-        this.getActivitiesEndpoint = new ApiEndpoint('players/self/activities');
+        this.getActivitiesEndpoint = new ApiEndpoint('players/activities');
+        this.getActivitiesPlayerEndpoint = new ApiEndpoint('players/self/activities');
         this._api = api;
     }
     /**
@@ -135,19 +135,19 @@ var PlayersApiModule = /** @class */ (function () {
             });
         });
     };
-    PlayersApiModule.prototype.getActivitiesCommon = function (options) {
+    PlayersApiModule.prototype.getActivities = function (options) {
         return __awaiter(this, void 0, void 0, function () {
-            var limit, offset, response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var _a, limit, offset, response;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        limit = options.limit, offset = options.offset;
+                        _a = options || {}, limit = _a.limit, offset = _a.offset;
                         return [4 /*yield*/, this._api.request({
-                                url: this.getActivitiesCommonEndpoint.url,
+                                url: this.getActivitiesEndpoint.url,
                                 params: { limit: limit, offset: offset }
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _b.sent();
                         return [2 /*return*/, {
                                 uid: response.data.uid,
                                 activities: response.data.activities
@@ -156,19 +156,19 @@ var PlayersApiModule = /** @class */ (function () {
             });
         });
     };
-    PlayersApiModule.prototype.getActivities = function (options) {
+    PlayersApiModule.prototype.getActivitiesPlayer = function (options) {
         return __awaiter(this, void 0, void 0, function () {
-            var limit, offset, response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var _a, limit, offset, response;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
-                        limit = options.limit, offset = options.offset;
+                        _a = options || {}, limit = _a.limit, offset = _a.offset;
                         return [4 /*yield*/, this._api.request({
-                                url: this.getActivitiesEndpoint.url,
+                                url: this.getActivitiesPlayerEndpoint.url,
                                 params: { limit: limit, offset: offset }
                             })];
                     case 1:
-                        response = _a.sent();
+                        response = _b.sent();
                         return [2 /*return*/, {
                                 uid: response.data.uid,
                                 activities: response.data.activities

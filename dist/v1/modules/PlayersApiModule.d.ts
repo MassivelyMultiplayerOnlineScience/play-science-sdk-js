@@ -50,16 +50,16 @@ export default class PlayersApiModule {
         uid: string;
         linked: boolean;
     }>;
-    readonly getActivitiesCommonEndpoint: ApiEndpoint;
-    getActivitiesCommon(options: {
+    readonly getActivitiesEndpoint: ApiEndpoint;
+    getActivities(options?: {
         limit?: number;
         offset?: number;
     }): Promise<{
         uid: string;
         activities: TActivity[];
     }>;
-    readonly getActivitiesEndpoint: ApiEndpoint;
-    getActivities(options: {
+    readonly getActivitiesPlayerEndpoint: ApiEndpoint;
+    getActivitiesPlayer(options?: {
         limit?: number;
         offset?: number;
     }): Promise<{
