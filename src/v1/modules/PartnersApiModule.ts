@@ -19,4 +19,11 @@ export default class PartnersApiModule {
 		};
 	}
 
+	// Assuming the caching of videogames
+	public async getVideogame(id: number): Promise<TVideogame> {
+		return this.getAllVideogames().then(({ videogames }) => {
+			return videogames.find(videogame => videogame.id === id);
+		});
+	};
+
 }

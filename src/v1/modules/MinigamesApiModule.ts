@@ -19,4 +19,11 @@ export default class MinigamesApiModule {
 		};
 	}
 
+	// Assuming the caching of minigames
+	public async get(id: number): Promise<TMinigame> {
+		return this.getAll().then(({ minigames }) => {
+			return minigames.find(minigame => minigame.id === id);
+		});
+	};
+
 }

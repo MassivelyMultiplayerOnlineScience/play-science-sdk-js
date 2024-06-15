@@ -8,5 +8,6 @@ export default class MinigamesApiModule {
         uid: string;
         minigames: TMinigame[];
     }>;
+    get(id: number): Promise<TMinigame>;
 }
 //# sourceMappingURL=MinigamesApiModule.d.ts.map

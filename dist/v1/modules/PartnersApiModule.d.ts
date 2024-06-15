@@ -8,5 +8,6 @@ export default class PartnersApiModule {
         uid: string;
         videogames: TVideogame[];
     }>;
+    getVideogame(id: number): Promise<TVideogame>;
 }
 //# sourceMappingURL=PartnersApiModule.d.ts.map

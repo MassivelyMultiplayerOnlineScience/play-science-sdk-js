@@ -58,6 +58,18 @@ var PartnersApiModule = /** @class */ (function () {
             });
         });
     };
+    // Assuming the caching of videogames
+    PartnersApiModule.prototype.getVideogame = function (id) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.getAllVideogames().then(function (_a) {
+                        var videogames = _a.videogames;
+                        return videogames.find(function (videogame) { return videogame.id === id; });
+                    })];
+            });
+        });
+    };
+    ;
     return PartnersApiModule;
 }());
 export default PartnersApiModule;
