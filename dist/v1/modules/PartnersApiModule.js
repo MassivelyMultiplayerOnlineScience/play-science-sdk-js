@@ -65,7 +65,7 @@ var PartnersApiModule = /** @class */ (function () {
                 return [2 /*return*/, this.getAllVideogames().then(function (response) {
                         return {
                             uid: response.uid,
-                            videogames: response.videogames.find(function (videogame) { return videogame.id === id; })
+                            videogame: response.videogames.find(function (videogame) { return videogame.id === id; })
                         };
                     })];
             });

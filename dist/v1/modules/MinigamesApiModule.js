@@ -65,7 +65,7 @@ var MinigamesApiModule = /** @class */ (function () {
                 return [2 /*return*/, this.getAll().then(function (response) {
                         return {
                             uid: response.uid,
-                            minigames: response.minigames.find(function (minigame) { return minigame.id === id; })
+                            minigame: response.minigames.find(function (minigame) { return minigame.id === id; })
                         };
                     })];
             });

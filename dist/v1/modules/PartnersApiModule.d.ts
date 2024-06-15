@@ -10,7 +10,7 @@ export default class PartnersApiModule {
     }>;
     getVideogame(id: number): Promise<{
         uid: string;
-        videogames: TVideogame;
+        videogame: TVideogame;
     }>;
 }
 //# sourceMappingURL=PartnersApiModule.d.ts.map

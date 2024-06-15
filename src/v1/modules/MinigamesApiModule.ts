@@ -20,11 +20,11 @@ export default class MinigamesApiModule {
 	}
 
 	// Assuming the caching of minigames
-	public async get(id: number): Promise<{ uid: string, minigames: TMinigame }> {
+	public async get(id: number): Promise<{ uid: string, minigame: TMinigame }> {
 		return this.getAll().then(response => {
 			return {
 				uid: response.uid,
-				minigames: response.minigames.find(minigame => minigame.id === id)
+				minigame: response.minigames.find(minigame => minigame.id === id)
 			};
 		});
 	};
