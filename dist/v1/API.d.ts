@@ -22,10 +22,12 @@ export declare class Api {
     static readonly POST = "POST";
     static get HEADER_GAMECODE(): string;
     static get HEADER_GAMEVERSION(): string;
+    private _cacheTtlInformation;
     private _shortcutRequestEvaluator;
     get shortcutRequestEvaluator(): (requestOptions: TApiRequestOptions) => Promise<boolean>;
     private _shortcutRequestCallback;
     get shortcutRequestCallback(): (requestOptions: TApiRequestOptions, expectedStatusCode?: number) => Promise<any>;
+    private cache;
     private _idToken;
     get idToken(): string;
     set idToken(value: string);
@@ -46,6 +48,10 @@ export declare class Api {
         host: string;
         gameVersion: string;
         gameCode: string;
+        cacheTtlInformation?: {
+            endpoint: ApiEndpoint;
+            ttlInSeconds: number;
+        }[];
         shortcutRequestEvaluator?: (requestOptions: TApiRequestOptions) => Promise<boolean>;
         shortcutRequestCallback?: (requestOptions: TApiRequestOptions, expectedStatusCode?: number) => Promise<any>;
     }): void;

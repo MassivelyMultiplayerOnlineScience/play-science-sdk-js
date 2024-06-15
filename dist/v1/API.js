@@ -42,6 +42,7 @@ import PartnersApiModule from './modules/PartnersApiModule';
 import PlayersApiModule from './modules/PlayersApiModule';
 import RewardsApiModule from './modules/RewardsApiModule';
 import ServiceApiModule from './modules/ServiceApiModule';
+import NodeCache from 'node-cache';
 var ApiEndpoint = /** @class */ (function () {
     function ApiEndpoint(url) {
         this._url = url;
@@ -62,6 +63,7 @@ var ApiEndpoint = /** @class */ (function () {
 export { ApiEndpoint };
 var Api = /** @class */ (function () {
     function Api() {
+        this.cache = new NodeCache();
         this._minigames = new MinigamesApiModule(this);
         this._mmos = new MMOSApiModule(this);
         this._partners = new PartnersApiModule(this);
@@ -145,6 +147,7 @@ var Api = /** @class */ (function () {
         axios.defaults.headers.common['content-type'] = 'application/json';
         axios.defaults.headers.common['X-PlayScience-GameCode'] = gameCode;
         axios.defaults.headers.common['X-PlayScience-GameVersion'] = gameVersion;
+        this._cacheTtlInformation = options.cacheTtlInformation || [];
         this._shortcutRequestEvaluator = shortcutRequestEvaluator || (function () { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
             return [2 /*return*/, false];
         }); }); });
@@ -152,12 +155,21 @@ var Api = /** @class */ (function () {
     };
     Api.prototype.request = function (requestOptions_1) {
         return __awaiter(this, arguments, void 0, function (requestOptions, expectedStatusCode) {
-            var response, shortcutRequest;
+            var method, url, params, response, cacheTtlInformation, cacheKey, shortcutRequest;
             var _a;
             if (expectedStatusCode === void 0) { expectedStatusCode = 200; }
             return __generator(this, function (_b) {
                 switch (_b.label) {
-                    case 0: return [4 /*yield*/, this._shortcutRequestEvaluator(requestOptions)];
+                    case 0:
+                        method = requestOptions.method, url = requestOptions.url, params = requestOptions.params;
+                        cacheTtlInformation = this._cacheTtlInformation.find(function (cacheTtlInformation) { return cacheTtlInformation.endpoint.match(requestOptions.url); });
+                        // (i) Check cache
+                        if (method == Api.GET && cacheTtlInformation) {
+                            cacheKey = "".concat(method, "|").concat(url, "|").concat(JSON.stringify(params));
+                            response = this.cache.get(cacheKey);
+                        }
+                        if (!!response) return [3 /*break*/, 6];
+                        return [4 /*yield*/, this._shortcutRequestEvaluator(requestOptions)];
                     case 1:
                         shortcutRequest = _b.sent();
                         if (!shortcutRequest) return [3 /*break*/, 3];
@@ -175,7 +187,12 @@ var Api = /** @class */ (function () {
                                 cause: requestOptions
                             });
                         }
-                        return [2 /*return*/, response];
+                        // (iv) Cache response
+                        if (method == Api.GET && cacheTtlInformation) {
+                            this.cache.set(cacheKey, response, cacheTtlInformation.ttlInSeconds);
+                        }
+                        _b.label = 6;
+                    case 6: return [2 /*return*/, response];
                 }
             });
         });
