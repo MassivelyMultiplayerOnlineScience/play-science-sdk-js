@@ -11,9 +11,9 @@ export type TApiRequestOptions = {
     params?: any;
 };
 export declare class ApiEndpoint {
-    private _url;
-    get url(): string;
-    constructor(url: string);
+    private _urlPattern;
+    get urlPattern(): string;
+    constructor(urlPattern: string);
     match(url: string): boolean;
     compile(params: any): string;
 }

@@ -10,7 +10,7 @@ export default class RewardsApiModule {
 	public async getAll(): Promise< { uid: string, rewards: TReward[] } > {
 
 		const response = await this._api.request({
-			url: this.getAllEndpoint.url,
+			url: this.getAllEndpoint.urlPattern,
 		});
 
 		return {

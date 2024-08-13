@@ -46,7 +46,7 @@ var ServiceApiModule = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this._api.request({
-                            url: this.handshakeEndpoint.url
+                            url: this.handshakeEndpoint.urlPattern
                         })];
                     case 1:
                         response = _a.sent();

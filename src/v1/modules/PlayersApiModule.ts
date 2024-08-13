@@ -17,7 +17,7 @@ export default class PlayersApiModule {
 		Promise<{ uid: string, player: TPlayer }> {
 
 		const response = await this._api.request({
-			url: this.loginEndpoint.url
+			url: this.loginEndpoint.urlPattern
 		});
 
 		return {
@@ -39,7 +39,7 @@ export default class PlayersApiModule {
 
 		const response = await this._api.request({
 			method: Api.POST,
-			url: this.createEndpoint.url,
+			url: this.createEndpoint.urlPattern,
 			data: {
 				nick: options.nick
 			}
@@ -74,7 +74,7 @@ export default class PlayersApiModule {
 		const { otherPlayerProviderCode, otherPlayerSubjectCode} = options;
 
 		const response = await this._api.request({
-			url: this.linkedEndpoint.url,
+			url: this.linkedEndpoint.urlPattern,
 			params: {
 				otherPlayerProviderCode,
 				otherPlayerSubjectCode
@@ -93,7 +93,7 @@ export default class PlayersApiModule {
 
 		const { limit, offset } = options || {};
 		const response = await this._api.request({
-			url: this.getActivitiesEndpoint.url,
+			url: this.getActivitiesEndpoint.urlPattern,
 			params: { limit, offset }
 		});
 
@@ -109,7 +109,7 @@ export default class PlayersApiModule {
 
 		const { limit, offset } = options || {};
 		const response = await this._api.request({
-			url: this.getActivitiesPlayerEndpoint.url,
+			url: this.getActivitiesPlayerEndpoint.urlPattern,
 			params: { limit, offset }
 		});
 

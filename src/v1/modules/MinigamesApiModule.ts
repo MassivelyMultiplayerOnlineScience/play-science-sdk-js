@@ -10,7 +10,7 @@ export default class MinigamesApiModule {
 	public async getAll(): Promise<{ uid: string, minigames: TMinigame[] }> {
 
 		const response = await this._api.request({
-			url: this.getAllEndpoint.url,
+			url: this.getAllEndpoint.urlPattern,
 		});
 
 		return {

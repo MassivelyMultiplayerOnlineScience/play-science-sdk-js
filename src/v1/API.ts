@@ -18,18 +18,18 @@ export type TApiRequestOptions = {
 
 export class ApiEndpoint {
 
-	private _url: string; public get url() { return this._url; }
+	private _urlPattern: string; public get urlPattern() { return this._urlPattern; }
 
-	constructor(url: string) {
-		this._url = url;
+	constructor(urlPattern: string) {
+		this._urlPattern = urlPattern;
 	}
 
 	public match(url: string): boolean {
-		return match(this._url, { decode: decodeURIComponent })(url) !== false;
+		return match(this._urlPattern, { decode: decodeURIComponent })(url) !== false;
 	}
 
 	public compile(params: any): string {
-		return compile(this._url, { encode: encodeURIComponent })(params);
+		return compile(this._urlPattern, { encode: encodeURIComponent })(params);
 	}
 
 }

@@ -10,7 +10,7 @@ export default class PartnersApiModule {
 	public async getAllVideogames(): Promise<{ uid: string, videogames: TVideogame[] }> {
 
 		const response = await this._api.request({
-			url: this.getAllVideogamesEndpoint.url,
+			url: this.getAllVideogamesEndpoint.urlPattern,
 		});
 
 		return {

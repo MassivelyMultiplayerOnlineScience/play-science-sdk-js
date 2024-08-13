@@ -1,6 +1,6 @@
 {
 	"name": "@mmos/play-science-sdk-js",
-	"version": "0.0.28",
+	"version": "0.0.29",
 	"private": false,
 	"license": "MIT",
 	"description": "Play Science API - Javascript SDK, © 2022-24 MMOS Sàrl",
@@ -14,28 +14,28 @@
 		"url": "https://github.com/MassivelyMultiplayerOnlineScience/play-science-sdk-js-archive.git"
 	},
 	"dependencies": {
-		"@mmos/play-science-types": "^0.0.6",
-		"axios": "^1.7.2",
+		"@mmos/play-science-types": "^0.0.7",
+		"axios": "^1.7.3",
 		"bunyan": "^1.8.15",
 		"lodash": "^4.17.21",
 		"node-cache": "^5.1.2",
-		"path-to-regexp": "^6.2.2"
+		"path-to-regexp": "^7.1.0"
 	},
 	"engines": {
 		"node": ">=7.10.1"
 	},
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "^7.13.0",
-		"@typescript-eslint/parser": "^7.13.0",
+		"@typescript-eslint/eslint-plugin": "^8.1.0",
+		"@typescript-eslint/parser": "^8.1.0",
 		"esdoc": "^1.1.0",
 		"esdoc-standard-plugin": "~1.0.0",
-		"eslint": "^9.5.0",
+		"eslint": "^9.9.0",
 		"eslint-config-standard": "^17.1.0",
 		"eslint-plugin-import": "2.29.1",
-		"eslint-plugin-n": "^17.9.0",
-		"eslint-plugin-promise": "^6.2.0",
+		"eslint-plugin-n": "^17.10.2",
+		"eslint-plugin-promise": "^7.1.0",
 		"eslint-plugin-standard": "^5.0.0",
-		"typescript": "^5.4.5"
+		"typescript": "^5.5.4"
 	},
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",

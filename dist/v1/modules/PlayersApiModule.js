@@ -56,7 +56,7 @@ var PlayersApiModule = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this._api.request({
-                            url: this.loginEndpoint.url
+                            url: this.loginEndpoint.urlPattern
                         })];
                     case 1:
                         response = _a.sent();
@@ -81,7 +81,7 @@ var PlayersApiModule = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this._api.request({
                             method: Api.POST,
-                            url: this.createEndpoint.url,
+                            url: this.createEndpoint.urlPattern,
                             data: {
                                 nick: options.nick
                             }
@@ -119,7 +119,7 @@ var PlayersApiModule = /** @class */ (function () {
                     case 0:
                         otherPlayerProviderCode = options.otherPlayerProviderCode, otherPlayerSubjectCode = options.otherPlayerSubjectCode;
                         return [4 /*yield*/, this._api.request({
-                                url: this.linkedEndpoint.url,
+                                url: this.linkedEndpoint.urlPattern,
                                 params: {
                                     otherPlayerProviderCode: otherPlayerProviderCode,
                                     otherPlayerSubjectCode: otherPlayerSubjectCode
@@ -143,7 +143,7 @@ var PlayersApiModule = /** @class */ (function () {
                     case 0:
                         _a = options || {}, limit = _a.limit, offset = _a.offset;
                         return [4 /*yield*/, this._api.request({
-                                url: this.getActivitiesEndpoint.url,
+                                url: this.getActivitiesEndpoint.urlPattern,
                                 params: { limit: limit, offset: offset }
                             })];
                     case 1:
@@ -164,7 +164,7 @@ var PlayersApiModule = /** @class */ (function () {
                     case 0:
                         _a = options || {}, limit = _a.limit, offset = _a.offset;
                         return [4 /*yield*/, this._api.request({
-                                url: this.getActivitiesPlayerEndpoint.url,
+                                url: this.getActivitiesPlayerEndpoint.urlPattern,
                                 params: { limit: limit, offset: offset }
                             })];
                     case 1:

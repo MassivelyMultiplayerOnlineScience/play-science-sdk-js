@@ -44,19 +44,19 @@ import RewardsApiModule from './modules/RewardsApiModule';
 import ServiceApiModule from './modules/ServiceApiModule';
 import NodeCache from 'node-cache';
 var ApiEndpoint = /** @class */ (function () {
-    function ApiEndpoint(url) {
-        this._url = url;
+    function ApiEndpoint(urlPattern) {
+        this._urlPattern = urlPattern;
     }
-    Object.defineProperty(ApiEndpoint.prototype, "url", {
-        get: function () { return this._url; },
+    Object.defineProperty(ApiEndpoint.prototype, "urlPattern", {
+        get: function () { return this._urlPattern; },
         enumerable: false,
         configurable: true
     });
     ApiEndpoint.prototype.match = function (url) {
-        return match(this._url, { decode: decodeURIComponent })(url) !== false;
+        return match(this._urlPattern, { decode: decodeURIComponent })(url) !== false;
     };
     ApiEndpoint.prototype.compile = function (params) {
-        return compile(this._url, { encode: encodeURIComponent })(params);
+        return compile(this._urlPattern, { encode: encodeURIComponent })(params);
     };
     return ApiEndpoint;
 }());

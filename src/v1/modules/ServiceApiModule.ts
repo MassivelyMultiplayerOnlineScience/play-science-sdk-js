@@ -9,7 +9,7 @@ export default class ServiceApiModule {
 		Promise<{ uid: string }> {
 
 		const response = await this._api.request({
-			url:  this.handshakeEndpoint.url
+			url:  this.handshakeEndpoint.urlPattern
 		});
 
 		return {
